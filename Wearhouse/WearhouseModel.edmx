@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="wearhouseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="lot">
+          <Key>
+            <PropertyRef Name="lot_id" />
+          </Key>
+          <Property Name="lot_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="supplier_id" Type="int" Nullable="false" />
+          <Property Name="lot_receive_date" Type="datetime" Nullable="false" />
+          <Property Name="lot_receive_qty" Type="int" />
+          <Property Name="lot_unit_cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="lot_total_cost" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="lot_expire_date" Type="datetime" />
+          <Property Name="lot_create_at" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="lot_balance_qty" Type="int" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="producttype_id" Type="int" Nullable="false" />
+          <Property Name="product_image" Type="image" />
+          <Property Name="product_unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_unitprice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="product_stock_qty" Type="int" />
+        </EntityType>
+        <EntityType Name="producttype">
+          <Key>
+            <PropertyRef Name="producttype_id" />
+          </Key>
+          <Property Name="producttype_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="producttype_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplier_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="supplier_address" Type="nvarchar" MaxLength="500" />
+          <Property Name="supplier_phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier_email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="trans_id" />
+          </Key>
+          <Property Name="trans_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="trans_date_time" Type="datetime" Nullable="false" />
+          <Property Name="trans_type" Type="int" Nullable="false" />
+          <Property Name="trans_reason" Type="nvarchar" MaxLength="255" />
+          <Property Name="trans_qty" Type="int" />
+          <Property Name="trans_unit_price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="trans_total_amount" Type="decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <EntityType Name="userPass">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="verify_question">
+          <Key>
+            <PropertyRef Name="verify_id" />
+          </Key>
+          <Property Name="verify_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="verify_question" Type="nvarchar" MaxLength="50" />
+          <Property Name="verify_answer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_lot_product1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="lot" Type="Self.lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="lot">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lot_supplier1">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="1" />
+          <End Role="lot" Type="Self.lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="lot">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_producttype2">
+          <End Role="producttype" Type="Self.producttype" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producttype">
+              <PropertyRef Name="producttype_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="producttype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_product1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wearhouseModelStoreContainer">
+          <EntitySet Name="lot" EntityType="Self.lot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producttype" EntityType="Self.producttype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transaction" EntityType="Self.transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userPass" EntityType="Self.userPass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="verify_question" EntityType="Self.verify_question" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_lot_product1" Association="Self.FK_lot_product1">
+            <End Role="product" EntitySet="product" />
+            <End Role="lot" EntitySet="lot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lot_supplier1" Association="Self.FK_lot_supplier1">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="lot" EntitySet="lot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_producttype2" Association="Self.FK_product_producttype2">
+            <End Role="producttype" EntitySet="producttype" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_product1" Association="Self.FK_transaction_product1">
+            <End Role="product" EntitySet="product" />
+            <End Role="transaction" EntitySet="transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wearhouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="lot">
+          <Key>
+            <PropertyRef Name="lot_id" />
+          </Key>
+          <Property Name="lot_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="supplier_id" Type="Int32" Nullable="false" />
+          <Property Name="lot_receive_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lot_receive_qty" Type="Int32" />
+          <Property Name="lot_unit_cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="lot_total_cost" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="lot_expire_date" Type="DateTime" Precision="3" />
+          <Property Name="lot_create_at" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="product" Relationship="Self.FK_lot_product1" FromRole="lot" ToRole="product" />
+          <NavigationProperty Name="supplier" Relationship="Self.FK_lot_supplier1" FromRole="lot" ToRole="supplier" />
+          <Property Name="lot_balance_qty" Type="Int32" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="producttype_id" Type="Int32" Nullable="false" />
+          <Property Name="product_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="product_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_unitprice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="product_stock_qty" Type="Int32" />
+          <NavigationProperty Name="lot" Relationship="Self.FK_lot_product1" FromRole="product" ToRole="lot" />
+          <NavigationProperty Name="producttype" Relationship="Self.FK_product_producttype2" FromRole="product" ToRole="producttype" />
+          <NavigationProperty Name="transaction" Relationship="Self.FK_transaction_product1" FromRole="product" ToRole="transaction" />
+        </EntityType>
+        <EntityType Name="producttype">
+          <Key>
+            <PropertyRef Name="producttype_id" />
+          </Key>
+          <Property Name="producttype_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="producttype_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="product" Relationship="Self.FK_product_producttype2" FromRole="producttype" ToRole="product" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplier_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="lot" Relationship="Self.FK_lot_supplier1" FromRole="supplier" ToRole="lot" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="transaction">
+          <Key>
+            <PropertyRef Name="trans_id" />
+          </Key>
+          <Property Name="trans_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="trans_date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="trans_type" Type="Int32" Nullable="false" />
+          <Property Name="trans_reason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="trans_qty" Type="Int32" />
+          <Property Name="trans_unit_price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="trans_total_amount" Type="Decimal" Precision="12" Scale="2" />
+          <NavigationProperty Name="product" Relationship="Self.FK_transaction_product1" FromRole="transaction" ToRole="product" />
+        </EntityType>
+        <Association Name="FK_lot_product1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="lot" Type="Self.lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="lot">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lot_supplier1">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="1" />
+          <End Role="lot" Type="Self.lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="lot">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_producttype2">
+          <End Role="producttype" Type="Self.producttype" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producttype">
+              <PropertyRef Name="producttype_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="producttype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transaction_product1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="transaction" Type="Self.transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="transaction">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wearhouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="lot" EntityType="Self.lot" />
+          <EntitySet Name="product" EntityType="Self.product" />
+          <EntitySet Name="producttype" EntityType="Self.producttype" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="transaction" EntityType="Self.transaction" />
+          <AssociationSet Name="FK_lot_product1" Association="Self.FK_lot_product1">
+            <End Role="product" EntitySet="product" />
+            <End Role="lot" EntitySet="lot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lot_supplier1" Association="Self.FK_lot_supplier1">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="lot" EntitySet="lot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_producttype2" Association="Self.FK_product_producttype2">
+            <End Role="producttype" EntitySet="producttype" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transaction_product1" Association="Self.FK_transaction_product1">
+            <End Role="product" EntitySet="product" />
+            <End Role="transaction" EntitySet="transaction" />
+          </AssociationSet>
+          <EntitySet Name="verify_question" EntityType="wearhouseModel.verify_question" />
+          <EntitySet Name="userPass" EntityType="wearhouseModel.userPass" />
+        </EntityContainer>
+        <EntityType Name="verify_question">
+          <Key>
+            <PropertyRef Name="verify_id" />
+          </Key>
+          <Property Name="verify_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="verify_question1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="verify_answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="userPass">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wearhouseModelStoreContainer" CdmEntityContainer="wearhouseEntities">
+          <EntitySetMapping Name="lot">
+            <EntityTypeMapping TypeName="wearhouseModel.lot">
+              <MappingFragment StoreEntitySet="lot">
+                <ScalarProperty Name="lot_balance_qty" ColumnName="lot_balance_qty" />
+                <ScalarProperty Name="lot_id" ColumnName="lot_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="lot_receive_date" ColumnName="lot_receive_date" />
+                <ScalarProperty Name="lot_receive_qty" ColumnName="lot_receive_qty" />
+                <ScalarProperty Name="lot_unit_cost" ColumnName="lot_unit_cost" />
+                <ScalarProperty Name="lot_total_cost" ColumnName="lot_total_cost" />
+                <ScalarProperty Name="lot_expire_date" ColumnName="lot_expire_date" />
+                <ScalarProperty Name="lot_create_at" ColumnName="lot_create_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product">
+            <EntityTypeMapping TypeName="wearhouseModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="producttype_id" ColumnName="producttype_id" />
+                <ScalarProperty Name="product_image" ColumnName="product_image" />
+                <ScalarProperty Name="product_unit" ColumnName="product_unit" />
+                <ScalarProperty Name="product_unitprice" ColumnName="product_unitprice" />
+                <ScalarProperty Name="product_stock_qty" ColumnName="product_stock_qty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producttype">
+            <EntityTypeMapping TypeName="wearhouseModel.producttype">
+              <MappingFragment StoreEntitySet="producttype">
+                <ScalarProperty Name="producttype_id" ColumnName="producttype_id" />
+                <ScalarProperty Name="producttype_name" ColumnName="producttype_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplier">
+            <EntityTypeMapping TypeName="wearhouseModel.supplier">
+              <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+                <ScalarProperty Name="supplier_address" ColumnName="supplier_address" />
+                <ScalarProperty Name="supplier_phone" ColumnName="supplier_phone" />
+                <ScalarProperty Name="supplier_email" ColumnName="supplier_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="wearhouseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transaction">
+            <EntityTypeMapping TypeName="wearhouseModel.transaction">
+              <MappingFragment StoreEntitySet="transaction">
+                <ScalarProperty Name="trans_id" ColumnName="trans_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="trans_date_time" ColumnName="trans_date_time" />
+                <ScalarProperty Name="trans_type" ColumnName="trans_type" />
+                <ScalarProperty Name="trans_reason" ColumnName="trans_reason" />
+                <ScalarProperty Name="trans_qty" ColumnName="trans_qty" />
+                <ScalarProperty Name="trans_unit_price" ColumnName="trans_unit_price" />
+                <ScalarProperty Name="trans_total_amount" ColumnName="trans_total_amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="verify_question">
+            <EntityTypeMapping TypeName="wearhouseModel.verify_question">
+              <MappingFragment StoreEntitySet="verify_question">
+                <ScalarProperty Name="verify_answer" ColumnName="verify_answer" />
+                <ScalarProperty Name="verify_question1" ColumnName="verify_question" />
+                <ScalarProperty Name="verify_id" ColumnName="verify_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userPass">
+            <EntityTypeMapping TypeName="wearhouseModel.userPass">
+              <MappingFragment StoreEntitySet="userPass">
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

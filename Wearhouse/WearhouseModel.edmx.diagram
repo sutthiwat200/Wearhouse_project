@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ec010365af3467d9710c2989bbd5e66" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="wearhouseModel.lot" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="wearhouseModel.product" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="wearhouseModel.producttype" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="wearhouseModel.supplier" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wearhouseModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="wearhouseModel.transaction" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="wearhouseModel.FK_lot_product1" ManuallyRouted="false" />
+        <AssociationConnector Association="wearhouseModel.FK_lot_supplier1" ManuallyRouted="false" />
+        <AssociationConnector Association="wearhouseModel.FK_product_producttype2" ManuallyRouted="false" />
+        <AssociationConnector Association="wearhouseModel.FK_transaction_product1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="wearhouseModel.verify_question" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="wearhouseModel.userPass" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
