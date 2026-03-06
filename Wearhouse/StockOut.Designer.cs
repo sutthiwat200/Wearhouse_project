@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockOut));
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelProductSelection = new System.Windows.Forms.Panel();
             this.labelSelectProduct = new System.Windows.Forms.Label();
@@ -308,9 +309,10 @@
             this.Controls.Add(this.panelProductSelection);
             this.Controls.Add(this.dataGridViewTransactions);
             this.Controls.Add(this.labelTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StockOut";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Out";
+            this.Text = "เบิกสินค้าออก";
             this.Load += new System.EventHandler(this.StockOut_Load);
             this.panelProductSelection.ResumeLayout(false);
             this.panelProductSelection.PerformLayout();

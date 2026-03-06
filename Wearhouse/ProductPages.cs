@@ -231,6 +231,19 @@ namespace Wearhouse
                 {
                     ProductCard card = new ProductCard();
                     card.SetProductData(product.Id, product.Name, product.Quantity, product.Price, product.Image);
+                    // Show "New" badge if product received within last 1 day
+                    bool isNew = false;
+                    try
+                    {
+                        if (product.ReceiveDate > DateTime.MinValue)
+                        {
+                            var age = DateTime.Now - product.ReceiveDate;
+                            if (age.TotalDays <= 1)
+                                isNew = true;
+                        }
+                    }
+                    catch { }
+                    card.SetIsNew(isNew);
                     
                     // Subscribe to ProductDeleted event
                     card.ProductDeleted += (s, e) =>
@@ -550,6 +563,21 @@ namespace Wearhouse
                     ClearAllFilters();
                 }
             }
+        }
+
+        private void showproductpanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BackBtn_Return_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

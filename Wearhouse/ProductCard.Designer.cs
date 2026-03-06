@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.panelShadow = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,9 +41,20 @@
             this.Namelabel = new System.Windows.Forms.Label();
             this.Idlabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.badgeLabel = new System.Windows.Forms.Label();
+            this.panelShadow.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // panelShadow
+            // 
+            this.panelShadow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panelShadow.Controls.Add(this.panel1);
+            this.panelShadow.Location = new System.Drawing.Point(6, 6);
+            this.panelShadow.Name = "panelShadow";
+            this.panelShadow.Size = new System.Drawing.Size(238, 262);
+            this.panelShadow.TabIndex = 0;
             // 
             // panel1
             // 
@@ -58,15 +70,16 @@
             this.panel1.Controls.Add(this.Namelabel);
             this.panel1.Controls.Add(this.Idlabel);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(5, 6);
+            this.panel1.Controls.Add(this.badgeLabel);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(235, 208);
-            this.panel1.TabIndex = 0;
+            this.panel1.Size = new System.Drawing.Size(238, 262);
+            this.panel1.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 158);
+            this.label2.Location = new System.Drawing.Point(21, 200);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 10;
@@ -75,7 +88,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 139);
+            this.label3.Location = new System.Drawing.Point(11, 182);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 9;
@@ -84,7 +97,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 121);
+            this.label4.Location = new System.Drawing.Point(31, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 8;
@@ -93,7 +106,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 103);
+            this.label1.Location = new System.Drawing.Point(25, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 7;
@@ -101,28 +114,28 @@
             // 
             // delbtn
             // 
-            this.delbtn.Location = new System.Drawing.Point(136, 176);
+            this.delbtn.Location = new System.Drawing.Point(120, 225);
             this.delbtn.Name = "delbtn";
-            this.delbtn.Size = new System.Drawing.Size(75, 23);
+            this.delbtn.Size = new System.Drawing.Size(46, 28);
             this.delbtn.TabIndex = 6;
             this.delbtn.Text = "ลบ";
-            this.delbtn.UseVisualStyleBackColor = true;
+            this.delbtn.UseVisualStyleBackColor = false;
             this.delbtn.Click += new System.EventHandler(this.delbtn_Click_1);
             // 
             // editbtn
             // 
-            this.editbtn.Location = new System.Drawing.Point(17, 176);
+            this.editbtn.Location = new System.Drawing.Point(68, 225);
             this.editbtn.Name = "editbtn";
-            this.editbtn.Size = new System.Drawing.Size(81, 23);
+            this.editbtn.Size = new System.Drawing.Size(51, 28);
             this.editbtn.TabIndex = 5;
             this.editbtn.Text = "แก้ไข";
-            this.editbtn.UseVisualStyleBackColor = true;
+            this.editbtn.UseVisualStyleBackColor = false;
             this.editbtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // Pricelabel
             // 
             this.Pricelabel.AutoSize = true;
-            this.Pricelabel.Location = new System.Drawing.Point(61, 158);
+            this.Pricelabel.Location = new System.Drawing.Point(65, 200);
             this.Pricelabel.Name = "Pricelabel";
             this.Pricelabel.Size = new System.Drawing.Size(31, 13);
             this.Pricelabel.TabIndex = 4;
@@ -131,7 +144,7 @@
             // Quantitylabel
             // 
             this.Quantitylabel.AutoSize = true;
-            this.Quantitylabel.Location = new System.Drawing.Point(61, 139);
+            this.Quantitylabel.Location = new System.Drawing.Point(63, 182);
             this.Quantitylabel.Name = "Quantitylabel";
             this.Quantitylabel.Size = new System.Drawing.Size(46, 13);
             this.Quantitylabel.TabIndex = 3;
@@ -140,17 +153,17 @@
             // Namelabel
             // 
             this.Namelabel.AutoSize = true;
-            this.Namelabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.Namelabel.Location = new System.Drawing.Point(61, 121);
+            this.Namelabel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Namelabel.Location = new System.Drawing.Point(63, 164);
             this.Namelabel.Name = "Namelabel";
-            this.Namelabel.Size = new System.Drawing.Size(35, 13);
+            this.Namelabel.Size = new System.Drawing.Size(39, 15);
             this.Namelabel.TabIndex = 2;
             this.Namelabel.Text = "Name";
             // 
             // Idlabel
             // 
             this.Idlabel.AutoSize = true;
-            this.Idlabel.Location = new System.Drawing.Point(61, 103);
+            this.Idlabel.Location = new System.Drawing.Point(65, 148);
             this.Idlabel.Name = "Idlabel";
             this.Idlabel.Size = new System.Drawing.Size(18, 13);
             this.Idlabel.TabIndex = 1;
@@ -158,22 +171,36 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(75, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(70, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 97);
+            this.pictureBox1.Size = new System.Drawing.Size(96, 96);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // badgeLabel
+            // 
+            this.badgeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(150)))), ((int)(((byte)(70)))));
+            this.badgeLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.badgeLabel.ForeColor = System.Drawing.Color.White;
+            this.badgeLabel.Location = new System.Drawing.Point(190, 8);
+            this.badgeLabel.Name = "badgeLabel";
+            this.badgeLabel.Size = new System.Drawing.Size(40, 20);
+            this.badgeLabel.TabIndex = 11;
+            this.badgeLabel.Text = "New";
+            this.badgeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.badgeLabel.Visible = false;
             // 
             // ProductCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelShadow);
             this.Name = "ProductCard";
-            this.Size = new System.Drawing.Size(247, 220);
+            this.Size = new System.Drawing.Size(247, 278);
             this.Load += new System.EventHandler(this.ProductCard_Load);
+            this.panelShadow.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -183,7 +210,9 @@
 
         #endregion
 
+        private System.Windows.Forms.Panel panelShadow;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label badgeLabel;
         private System.Windows.Forms.Label Quantitylabel;
         private System.Windows.Forms.Label Namelabel;
         private System.Windows.Forms.Label Idlabel;

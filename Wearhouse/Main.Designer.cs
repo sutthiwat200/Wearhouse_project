@@ -30,18 +30,23 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1Subtitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2Subtitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label5Subtitle = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label4Subtitle = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label3Subtitle = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
@@ -58,32 +63,44 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.label1Subtitle);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(2, 3);
+            this.panel1.Location = new System.Drawing.Point(24, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 221);
+            this.panel1.Size = new System.Drawing.Size(310, 232);
             this.panel1.TabIndex = 0;
+            this.panel1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label1Subtitle
+            // 
+            this.label1Subtitle.AutoSize = true;
+            this.label1Subtitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1Subtitle.Location = new System.Drawing.Point(97, 197);
+            this.label1Subtitle.Name = "label1Subtitle";
+            this.label1Subtitle.Size = new System.Drawing.Size(150, 15);
+            this.label1Subtitle.TabIndex = 4;
+            this.label1Subtitle.Text = "รายการสินค้า, SKU, จัดการราคา";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(150, 190);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(95, 157);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 20);
+            this.label1.Size = new System.Drawing.Size(129, 40);
             this.label1.TabIndex = 1;
             this.label1.Text = "สินค้า";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(81, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(37, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 185);
+            this.pictureBox1.Size = new System.Drawing.Size(240, 194);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -91,32 +108,44 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.label2Subtitle);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(392, 3);
+            this.panel2.Location = new System.Drawing.Point(340, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(407, 221);
+            this.panel2.Size = new System.Drawing.Size(310, 232);
             this.panel2.TabIndex = 1;
+            this.panel2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // label2Subtitle
+            // 
+            this.label2Subtitle.AutoSize = true;
+            this.label2Subtitle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2Subtitle.Location = new System.Drawing.Point(98, 197);
+            this.label2Subtitle.Name = "label2Subtitle";
+            this.label2Subtitle.Size = new System.Drawing.Size(124, 15);
+            this.label2Subtitle.TabIndex = 5;
+            this.label2Subtitle.Text = "จัดการการรับสินค้าเข้าคลัง";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(181, 191);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(92, 157);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 20);
+            this.label2.Size = new System.Drawing.Size(130, 40);
             this.label2.TabIndex = 3;
-            this.label2.Text = "รับสินค้าเข้า";
+            this.label2.Text = "รับสินค้า";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(112, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(22, 6);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(204, 185);
+            this.pictureBox2.Size = new System.Drawing.Size(271, 217);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -124,33 +153,45 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.Controls.Add(this.label5Subtitle);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.pictureBox5);
-            this.panel3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel3.Location = new System.Drawing.Point(2, 230);
+            this.panel3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panel3.Location = new System.Drawing.Point(660, 24);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(255, 218);
+            this.panel3.Size = new System.Drawing.Size(310, 232);
             this.panel3.TabIndex = 2;
+            this.panel3.Click += new System.EventHandler(this.pictureBox5_Click);
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // label5Subtitle
+            // 
+            this.label5Subtitle.AutoSize = true;
+            this.label5Subtitle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5Subtitle.Location = new System.Drawing.Point(73, 197);
+            this.label5Subtitle.Name = "label5Subtitle";
+            this.label5Subtitle.Size = new System.Drawing.Size(145, 15);
+            this.label5Subtitle.TabIndex = 5;
+            this.label5Subtitle.Text = "จักการการส่งสินค้าออกจากคลัง";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(94, 184);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(71, 157);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 20);
+            this.label5.Size = new System.Drawing.Size(167, 40);
             this.label5.TabIndex = 3;
-            this.label5.Text = "ส่งสินค้าออก";
+            this.label5.Text = "เบิกสินค้า";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox5
             // 
             this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(36, 5);
+            this.pictureBox5.Location = new System.Drawing.Point(32, 3);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(188, 167);
+            this.pictureBox5.Size = new System.Drawing.Size(246, 220);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 2;
             this.pictureBox5.TabStop = false;
@@ -158,32 +199,44 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Controls.Add(this.label4Subtitle);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.pictureBox4);
-            this.panel4.Location = new System.Drawing.Point(263, 230);
+            this.panel4.Location = new System.Drawing.Point(24, 290);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(261, 218);
+            this.panel4.Size = new System.Drawing.Size(470, 180);
             this.panel4.TabIndex = 3;
+            this.panel4.Click += new System.EventHandler(this.pictureBox4_Click);
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            // 
+            // label4Subtitle
+            // 
+            this.label4Subtitle.AutoSize = true;
+            this.label4Subtitle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label4Subtitle.Location = new System.Drawing.Point(191, 96);
+            this.label4Subtitle.Name = "label4Subtitle";
+            this.label4Subtitle.Size = new System.Drawing.Size(137, 15);
+            this.label4Subtitle.TabIndex = 5;
+            this.label4Subtitle.Text = "ข้อมูลการติดต่อซัพพลายเออร์";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(98, 183);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(188, 48);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 20);
+            this.label4.Size = new System.Drawing.Size(320, 48);
             this.label4.TabIndex = 3;
-            this.label4.Text = "ผู้ผลิต";
+            this.label4.Text = "ซัพพลายเออร์";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBox4
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(36, 5);
+            this.pictureBox4.Location = new System.Drawing.Point(3, 3);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(188, 167);
+            this.pictureBox4.Size = new System.Drawing.Size(228, 177);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 2;
             this.pictureBox4.TabStop = false;
@@ -191,32 +244,44 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.BackColor = System.Drawing.Color.Transparent;
+            this.panel5.Controls.Add(this.label3Subtitle);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.pictureBox3);
-            this.panel5.Location = new System.Drawing.Point(530, 230);
+            this.panel5.Location = new System.Drawing.Point(500, 290);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(269, 218);
+            this.panel5.Size = new System.Drawing.Size(470, 180);
             this.panel5.TabIndex = 3;
+            this.panel5.Click += new System.EventHandler(this.pictureBox3_Click);
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
+            // 
+            // label3Subtitle
+            // 
+            this.label3Subtitle.AutoSize = true;
+            this.label3Subtitle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3Subtitle.Location = new System.Drawing.Point(248, 96);
+            this.label3Subtitle.Name = "label3Subtitle";
+            this.label3Subtitle.Size = new System.Drawing.Size(144, 15);
+            this.label3Subtitle.TabIndex = 5;
+            this.label3Subtitle.Text = "รายงานการเคลื่อนไหวของสินค้า";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(101, 183);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(245, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 20);
+            this.label3.Size = new System.Drawing.Size(320, 48);
             this.label3.TabIndex = 3;
             this.label3.Text = "รายงาน";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(36, 5);
+            this.pictureBox3.Location = new System.Drawing.Point(-10, -28);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(188, 167);
+            this.pictureBox3.Size = new System.Drawing.Size(318, 244);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
@@ -226,7 +291,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(243)))), ((int)(((byte)(247)))));
+            this.ClientSize = new System.Drawing.Size(1000, 508);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -234,7 +300,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Wearhouse";
+            this.Text = "หน้าหลัก";
             this.Load += new System.EventHandler(this.LoginFomr_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -272,5 +338,10 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label1Subtitle;
+        private System.Windows.Forms.Label label2Subtitle;
+        private System.Windows.Forms.Label label5Subtitle;
+        private System.Windows.Forms.Label label4Subtitle;
+        private System.Windows.Forms.Label label3Subtitle;
     }
 }

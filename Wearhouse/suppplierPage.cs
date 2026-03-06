@@ -20,8 +20,6 @@ namespace Wearhouse
 
         private void suppplierPage_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'wearhouseDataSet.supplier' table. You can move, or remove it, as needed.
-            this.supplierTableAdapter.Fill(this.wearhouseDataSet.supplier);
             LoadSuppliers();
             InitializePhoneInput();
         }
@@ -57,14 +55,15 @@ namespace Wearhouse
         {
             try
             {
-                // Recreate context to ensure fresh data from database
+                // Clear existing data
+                dataGridViewSupplier.DataSource = null;
+
                 using (wearhouseEntities context = new wearhouseEntities())
                 {
                     var suppliers = context.supplier.ToList();
                     
-                    // Rebind the DataGridView to refresh it
-                    supplierBindingSource.DataSource = suppliers;
-                    dataGridViewSupplier.Refresh();
+                    // Bind data directly to DataGridView
+                    dataGridViewSupplier.DataSource = suppliers;
                 }
             }
             catch (Exception ex)
@@ -111,111 +110,6 @@ namespace Wearhouse
             }
         }
 
-        private void ButtonUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(textBoxSupplierId.Text))
-                {
-                    MessageBox.Show("กรุณาเลือกซัพพลายเออร์เพื่ออัพเดต", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(textBoxSupplierName.Text))
-                {
-                    MessageBox.Show("กรุณาใส่ชื่อซัพพลายเออร์", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (!int.TryParse(textBoxSupplierId.Text, out int supplierId))
-                {
-                    MessageBox.Show("รหัสซัพพลายเออร์ไม่ถูกต้อง", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string name = textBoxSupplierName.Text.Trim();
-                string address = textBoxAddress.Text.Trim();
-                string phone = textBoxPhone.Text.Trim();
-
-                using (wearhouseEntities context = new wearhouseEntities())
-                {
-                    var supplier = context.supplier.FirstOrDefault(s => s.supplier_id == supplierId);
-
-                    if (supplier != null)
-                    {
-                        supplier.supplier_name = name;
-                        supplier.supplier_address = address;
-                        supplier.supplier_phone = phone;
-
-                        context.SaveChanges();
-
-                        MessageBox.Show("อัพเดตซัพพลายเออร์สำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ClearForm();
-                        LoadSuppliers();
-                    }
-                    else
-                    {
-                        MessageBox.Show("ไม่พบซัพพลายเออร์", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ข้อผิดพลาด: " + ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(textBoxSupplierId.Text))
-                {
-                    MessageBox.Show("กรุณาเลือกซัพพลายเออร์เพื่อลบ", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (!int.TryParse(textBoxSupplierId.Text, out int supplierId))
-                {
-                    MessageBox.Show("รหัสซัพพลายเออร์ไม่ถูกต้อง", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                var result = MessageBox.Show(
-                    $"คุณแน่ใจหรือว่าต้องการลบ '{textBoxSupplierName.Text}'?",
-                    "ยืนยันการลบ",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
-
-                if (result == DialogResult.Yes)
-                {
-                    using (wearhouseEntities context = new wearhouseEntities())
-                    {
-                        var supplier = context.supplier.FirstOrDefault(s => s.supplier_id == supplierId);
-
-                        if (supplier != null)
-                        {
-                            context.supplier.Remove(supplier);
-                            context.SaveChanges();
-
-                            MessageBox.Show("ลบซัพพลายเออร์สำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearForm();
-                            LoadSuppliers();
-                        }
-                        else
-                        {
-                            MessageBox.Show("ไม่พบซัพพลายเออร์", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ข้อผิดพลาด: " + ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void ButtonClear_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -227,6 +121,7 @@ namespace Wearhouse
             textBoxSupplierName.Clear();
             textBoxAddress.Clear();
             textBoxPhone.Clear();
+            LoadSuppliers();
         }
 
         private void DataGridViewSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -236,7 +131,6 @@ namespace Wearhouse
                 if (e.RowIndex >= 0)
                 {
                     DataGridViewRow row = dataGridViewSupplier.Rows[e.RowIndex];
-                    string columnName = dataGridViewSupplier.Columns[e.ColumnIndex].Name;
 
                     // Load data to form when clicking any cell
                     if (row.Cells[0].Value != null)
@@ -257,18 +151,6 @@ namespace Wearhouse
                     if (row.Cells[3].Value != null)
                     {
                         textBoxPhone.Text = row.Cells[3].Value.ToString();
-                    }
-
-                    // Handle action columns
-                    if (columnName == "แก้ไข")
-                    {
-                        // Trigger Edit button click
-                        ButtonUpdate_Click(null, null);
-                    }
-                    else if (columnName == "ลบ")
-                    {
-                        // Trigger Delete button click
-                        ButtonDelete_Click(null, null);
                     }
                 }
             }
@@ -303,16 +185,40 @@ namespace Wearhouse
                 {
                     DataGridViewRow row = dataGridViewSupplier.Rows[e.RowIndex];
                     
-                    if (row.Cells[0].Value != null)
+                    if (row.Cells[0].Value != null && int.TryParse(row.Cells[0].Value.ToString(), out int supplierId))
                     {
-                        textBoxSupplierId.Text = row.Cells[0].Value.ToString();
+                        var result = MessageBox.Show(
+                            $"คุณแน่ใจหรือว่าต้องการลบ?",
+                            "ยืนยันการลบ",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                        );
+
+                        if (result == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                using (wearhouseEntities context = new wearhouseEntities())
+                                {
+                                    var supplier = context.supplier.FirstOrDefault(s => s.supplier_id == supplierId);
+
+                                    if (supplier != null)
+                                    {
+                                        context.supplier.Remove(supplier);
+                                        context.SaveChanges();
+
+                                        MessageBox.Show("ลบซัพพลายเออร์สำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        ClearForm();
+                                        LoadSuppliers();
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("ข้อผิดพลาด: " + ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
                     }
-                    if (row.Cells[1].Value != null)
-                    {
-                        textBoxSupplierName.Text = row.Cells[1].Value.ToString();
-                    }
-                    
-                    ButtonDelete_Click(null, null);
                 }
             }
         }

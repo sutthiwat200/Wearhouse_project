@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummaryReport));
             this.panelFilter = new System.Windows.Forms.Panel();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonFilter = new System.Windows.Forms.Button();
@@ -226,6 +227,7 @@
             this.Controls.Add(this.panelSummary);
             this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.labelTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SummaryReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รายงานการเคลื่อนไหวสินค้า";

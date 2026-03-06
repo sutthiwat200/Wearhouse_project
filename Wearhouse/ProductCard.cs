@@ -36,6 +36,17 @@ namespace Wearhouse
             }
         }
 
+        // Show or hide the badge (e.g., "New")
+        public void SetIsNew(bool isNew, string text = "New")
+        {
+            try
+            {
+                badgeLabel.Text = text;
+                badgeLabel.Visible = isNew;
+            }
+            catch { }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // Edit button - open EditProduct form with current product ID

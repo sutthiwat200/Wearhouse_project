@@ -133,7 +133,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 12;
-            this.button2.Text = "Add";
+            this.button2.Text = "เพิ่ม";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -170,7 +170,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "AddType";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddType";
+            this.Text = "เพิ่มประเภท";
             this.Load += new System.EventHandler(this.AddType_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.producttypeBindingSource)).EndInit();
