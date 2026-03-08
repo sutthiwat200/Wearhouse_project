@@ -118,9 +118,12 @@ namespace Wearhouse
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            SummaryReport summaryReportForm = new SummaryReport();
+            /*SummaryReport summaryReportForm = new SummaryReport();
             summaryReportForm.WindowState = this.WindowState;
-            summaryReportForm.ShowDialog();
+            summaryReportForm.ShowDialog();*/
+            CrytalReportPages crytalReportPages = new CrytalReportPages();
+            crytalReportPages.WindowState = this.WindowState;
+            crytalReportPages.ShowDialog();
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
