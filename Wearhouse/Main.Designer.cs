@@ -49,6 +49,8 @@
             this.label3Subtitle = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.buttonLogout = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -59,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -67,7 +70,7 @@
             this.panel1.Controls.Add(this.label1Subtitle);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(24, 24);
+            this.panel1.Location = new System.Drawing.Point(24, 70);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(310, 232);
             this.panel1.TabIndex = 0;
@@ -112,7 +115,7 @@
             this.panel2.Controls.Add(this.label2Subtitle);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(340, 24);
+            this.panel2.Location = new System.Drawing.Point(340, 70);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(310, 232);
             this.panel2.TabIndex = 1;
@@ -158,7 +161,7 @@
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.pictureBox5);
             this.panel3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel3.Location = new System.Drawing.Point(660, 24);
+            this.panel3.Location = new System.Drawing.Point(660, 70);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(310, 232);
             this.panel3.TabIndex = 2;
@@ -203,7 +206,7 @@
             this.panel4.Controls.Add(this.label4Subtitle);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.pictureBox4);
-            this.panel4.Location = new System.Drawing.Point(24, 290);
+            this.panel4.Location = new System.Drawing.Point(24, 336);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(470, 180);
             this.panel4.TabIndex = 3;
@@ -234,9 +237,9 @@
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox4.Location = new System.Drawing.Point(-169, 0);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(228, 177);
+            this.pictureBox4.Size = new System.Drawing.Size(568, 203);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 2;
             this.pictureBox4.TabStop = false;
@@ -248,7 +251,7 @@
             this.panel5.Controls.Add(this.label3Subtitle);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.pictureBox3);
-            this.panel5.Location = new System.Drawing.Point(500, 290);
+            this.panel5.Location = new System.Drawing.Point(500, 336);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(470, 180);
             this.panel5.TabIndex = 3;
@@ -279,28 +282,58 @@
             // 
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(-10, -28);
+            this.pictureBox3.Location = new System.Drawing.Point(-41, -28);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(318, 244);
+            this.pictureBox3.Size = new System.Drawing.Size(448, 244);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // panelTop
+            // 
+            this.panelTop.BackColor = System.Drawing.Color.White;
+            this.panelTop.Controls.Add(this.buttonLogout);
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(1000, 50);
+            this.panelTop.TabIndex = 0;
+            this.panelTop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTop_Paint);
+            // 
+            // buttonLogout
+            // 
+            this.buttonLogout.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.buttonLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(124)))), ((int)(((byte)(115)))));
+            this.buttonLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonLogout.FlatAppearance.BorderSize = 0;
+            this.buttonLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLogout.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLogout.ForeColor = System.Drawing.Color.White;
+            this.buttonLogout.Location = new System.Drawing.Point(851, 10);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(139, 30);
+            this.buttonLogout.TabIndex = 0;
+            this.buttonLogout.Text = "🚪 ออกจากระบบ";
+            this.buttonLogout.UseVisualStyleBackColor = false;
+            this.buttonLogout.Click += new System.EventHandler(this.ButtonLogout_Click);
+            this.buttonLogout.Paint += new System.Windows.Forms.PaintEventHandler(this.ButtonLogout_Paint);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(243)))), ((int)(((byte)(247)))));
-            this.ClientSize = new System.Drawing.Size(1000, 508);
+            this.ClientSize = new System.Drawing.Size(1000, 558);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "หน้าหลัก";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.LoginFomr_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -317,12 +350,15 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;

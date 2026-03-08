@@ -132,5 +132,59 @@ namespace Wearhouse
             suppplier.WindowState = this.WindowState;
             suppplier.ShowDialog();
         }
+
+        private void ButtonLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "คุณต้องการออกจากระบบหรือไม่?",
+                "ยืนยันการออกจากระบบ",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                // Open login form first with same window state
+                Login loginForm = new Login();
+                loginForm.WindowState = this.WindowState;
+                // Close current form
+                this.Hide();
+                loginForm.ShowDialog();
+                this.Close();
+            }
+        }
+
+        private void ButtonLogout_Paint(object sender, PaintEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+
+            e.Graphics.Clear(btn.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int radius = 10;
+            GraphicsPath path = GetRoundedRectPath(new Rectangle(0, 0, btn.Width, btn.Height), radius);
+            
+            // Fill button with background color
+            using (SolidBrush brush = new SolidBrush(btn.BackColor))
+            {
+                e.Graphics.FillPath(brush, path);
+            }
+
+            // Set region to create rounded corners effect
+            btn.Region = new Region(path);
+
+            // Draw text
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
+            e.Graphics.DrawString(btn.Text, btn.Font, new SolidBrush(btn.ForeColor), 
+                new RectangleF(0, 0, btn.Width, btn.Height), stringFormat);
+        }
+
+        private void panelTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

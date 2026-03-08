@@ -36,6 +36,17 @@ namespace Wearhouse
             }
         }
 
+        // Set receive date for display
+        public void SetReceiveDate(DateTime receiveDate)
+        {
+            try
+            {
+                receiveDateLabel.Text = receiveDate.ToString("dd/MM/yyyy");
+                receiveDateLabel.Visible = true;
+            }
+            catch { }
+        }
+
         // Show or hide the badge (e.g., "New")
         public void SetIsNew(bool isNew, string text = "New")
         {

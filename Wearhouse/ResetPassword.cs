@@ -17,6 +17,7 @@ namespace Wearhouse
         private bool question1Expanded = false;
         private bool question2Expanded = false;
         private bool question3Expanded = false;
+        private System.Windows.Forms.Label labelStatusMessage;
 
         public ResetPassword()
         {
@@ -365,6 +366,16 @@ namespace Wearhouse
         private void LabelQuestion3Header_Click(object sender, EventArgs e)
         {
             ToggleQuestion(panelQuestion3, labelQuestion3Icon);
+        }
+
+        private void CheckBoxShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxNewPassword.UseSystemPasswordChar = !checkBoxShowPassword.Checked;
+        }
+
+        private void CheckBoxShowConfirmPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxConfirmPassword.UseSystemPasswordChar = !checkBoxShowConfirmPassword.Checked;
         }
 
         private void ClearForm()

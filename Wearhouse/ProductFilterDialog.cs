@@ -243,5 +243,19 @@ namespace Wearhouse
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductFilterDialog));
+            this.SuspendLayout();
+            // 
+            // ProductFilterDialog
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "ProductFilterDialog";
+            this.ResumeLayout(false);
+
+        }
     }
 }

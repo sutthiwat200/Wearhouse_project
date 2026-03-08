@@ -192,13 +192,9 @@ namespace Wearhouse
             }
 
             // Apply date range filter
-            if (filterStartDate.HasValue && filterEndDate.HasValue)
-            {
-                filteredProducts = filteredProducts.Where(p =>
-                    p.ReceiveDate.Date >= filterStartDate.Value.Date && 
-                    p.ReceiveDate.Date <= filterEndDate.Value.Date
-                ).ToList();
-            }
+            // Note: Date filtering is already done at the data source level in GetProductsByDateRange()
+            // This code is kept for backward compatibility with other filter combinations
+            // Date filtering in RefreshProductDisplay is no longer needed as data is pre-filtered
 
             // Apply price filter
             if (filterMinPrice.HasValue)
@@ -230,7 +226,18 @@ namespace Wearhouse
                 foreach (var product in filteredProducts)
                 {
                     ProductCard card = new ProductCard();
-                    card.SetProductData(product.Id, product.Name, product.Quantity, product.Price, product.Image);
+
+                    // แสดงเฉพาะชื่อสินค้า
+                    string displayName = product.Name;
+
+                    card.SetProductData(product.Id, displayName, product.Quantity, product.Price, product.Image);
+
+                    // แสดงวันที่รับเข้าเมื่อมีการกรองวันที่
+                    if (filterStartDate.HasValue && filterEndDate.HasValue)
+                    {
+                        card.SetReceiveDate(product.ReceiveDate);
+                    }
+
                     // Show "New" badge if product received within last 1 day
                     bool isNew = false;
                     try
@@ -244,7 +251,7 @@ namespace Wearhouse
                     }
                     catch { }
                     card.SetIsNew(isNew);
-                    
+
                     // Subscribe to ProductDeleted event
                     card.ProductDeleted += (s, e) =>
                     {
@@ -256,7 +263,7 @@ namespace Wearhouse
                     {
                         LoadProducts();  // Refresh products after update
                     };
-                    
+
                     flowLayoutPanel.Controls.Add(card);
                 }
             }
@@ -286,7 +293,74 @@ namespace Wearhouse
                 foreach (var lot in lotList)
                 {
                     var item = lot.product;
-                    
+
+                    if (item == null) continue;
+
+                    Image productImage = null;
+
+                    // Convert byte array to Image
+                    if (item.product_image != null && item.product_image.Length > 0)
+                    {
+                        try
+                        {
+                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(item.product_image))
+                            {
+                                productImage = Image.FromStream(ms);
+                                productImage = new Bitmap(productImage);
+                            }
+                        }
+                        catch
+                        {
+                            productImage = null;
+                        }
+                    }
+
+                    // Get product type
+                    string productType = "";
+                    try
+                    {
+                        var type = db.producttype.FirstOrDefault(t => t.producttype_id == item.producttype_id);
+                        if (type != null)
+                            productType = type.producttype_name;
+                    }
+                    catch { }
+
+                    products.Add(new ProductData
+                    {
+                        Id = item.product_id,
+                        Name = item.product_name,
+                        Quantity = lot.lot_balance_qty ?? 0,
+                        Price = item.product_unitprice ?? 0,
+                        Image = productImage,
+                        Type = productType,
+                        ReceiveDate = lot.lot_receive_date
+                    });
+                }
+            }
+
+            return products;
+        }
+
+        private List<ProductData> GetProductsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            List<ProductData> products = new List<ProductData>();
+
+            using (wearhouseEntities db = new wearhouseEntities())
+            {
+                // Convert to date only (remove time portion) then expand to full day range
+                DateTime startOfDay = startDate.Date;  // 00:00:00
+                DateTime endOfNextDay = endDate.Date.AddDays(1);  // Next day at 00:00:00
+
+                // Get only lots within the specified date range (inclusive)
+                var lotList = db.lot
+                    .Where(l => l.lot_receive_date >= startOfDay && 
+                                l.lot_receive_date < endOfNextDay)
+                    .ToList();
+
+                foreach (var lot in lotList)
+                {
+                    var item = lot.product;
+
                     if (item == null) continue;
 
                     Image productImage = null;
@@ -456,32 +530,13 @@ namespace Wearhouse
 
         private void ButtonFilterDate_Click(object sender, EventArgs e)
         {
-            // Create a simple date filter dialog
-            Form dateFilterForm = new Form();
-            dateFilterForm.Text = "กรองตามวันที่";
-            dateFilterForm.Size = new System.Drawing.Size(350, 180);
-            dateFilterForm.StartPosition = FormStartPosition.CenterParent;
-
-            Label labelStart = new Label() { Text = "วันเริ่มต้น :", Location = new System.Drawing.Point(10, 20), AutoSize = true };
-            DateTimePicker dtpStart = new DateTimePicker() { Location = new System.Drawing.Point(120, 20), Width = 200 };
-
-            Label labelEnd = new Label() { Text = "วันสิ้นสุด :", Location = new System.Drawing.Point(10, 60), AutoSize = true };
-            DateTimePicker dtpEnd = new DateTimePicker() { Location = new System.Drawing.Point(120, 60), Width = 200 };
-
-            Button btnOK = new Button() { Text = "ตกลง", Location = new System.Drawing.Point(120, 110), Width = 90, DialogResult = DialogResult.OK };
-            Button btnCancel = new Button() { Text = "ยกเลิก", Location = new System.Drawing.Point(220, 110), Width = 90, DialogResult = DialogResult.Cancel };
-
-            dateFilterForm.Controls.Add(labelStart);
-            dateFilterForm.Controls.Add(dtpStart);
-            dateFilterForm.Controls.Add(labelEnd);
-            dateFilterForm.Controls.Add(dtpEnd);
-            dateFilterForm.Controls.Add(btnOK);
-            dateFilterForm.Controls.Add(btnCancel);
+            DateFilterForm dateFilterForm = new DateFilterForm();
 
             if (dateFilterForm.ShowDialog(this) == DialogResult.OK)
             {
-                allProducts = GetAllProductsFromDatabase();
-                SetDateRangeFilter(dtpStart.Value, dtpEnd.Value);
+                // Get only products within the selected date range
+                allProducts = GetProductsByDateRange(dateFilterForm.StartDate, dateFilterForm.EndDate);
+                SetDateRangeFilter(dateFilterForm.StartDate, dateFilterForm.EndDate);
             }
         }
 

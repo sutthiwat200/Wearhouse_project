@@ -28,6 +28,7 @@ namespace Wearhouse
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResetPassword));
             this.panelTitle = new System.Windows.Forms.Panel();
             this.labelTitleIcon = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -35,6 +36,8 @@ namespace Wearhouse
             this.labelStatusMessage = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.panelStep3 = new System.Windows.Forms.Panel();
+            this.checkBoxShowConfirmPassword = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowPassword = new System.Windows.Forms.CheckBox();
             this.buttonResetPassword = new System.Windows.Forms.Button();
             this.textBoxConfirmPassword = new System.Windows.Forms.TextBox();
             this.labelConfirmPasswordIcon = new System.Windows.Forms.Label();
@@ -117,7 +120,6 @@ namespace Wearhouse
             this.panelMain.AutoScroll = true;
             this.panelMain.BackColor = System.Drawing.Color.White;
             this.panelMain.Controls.Add(this.labelStatusMessage);
-            this.panelMain.Controls.Add(this.buttonCancel);
             this.panelMain.Controls.Add(this.panelStep3);
             this.panelMain.Controls.Add(this.labelStep3);
             this.panelMain.Controls.Add(this.buttonVerifyAnswers);
@@ -149,7 +151,7 @@ namespace Wearhouse
             this.buttonCancel.BackColor = System.Drawing.Color.White;
             this.buttonCancel.Font = new System.Drawing.Font("Tahoma", 10F);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonCancel.Location = new System.Drawing.Point(561, 671);
+            this.buttonCancel.Location = new System.Drawing.Point(364, 131);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(170, 35);
             this.buttonCancel.TabIndex = 110;
@@ -161,6 +163,9 @@ namespace Wearhouse
             // 
             this.panelStep3.BackColor = System.Drawing.Color.White;
             this.panelStep3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStep3.Controls.Add(this.checkBoxShowConfirmPassword);
+            this.panelStep3.Controls.Add(this.buttonCancel);
+            this.panelStep3.Controls.Add(this.checkBoxShowPassword);
             this.panelStep3.Controls.Add(this.buttonResetPassword);
             this.panelStep3.Controls.Add(this.textBoxConfirmPassword);
             this.panelStep3.Controls.Add(this.labelConfirmPasswordIcon);
@@ -175,6 +180,30 @@ namespace Wearhouse
             this.panelStep3.Name = "panelStep3";
             this.panelStep3.Size = new System.Drawing.Size(710, 180);
             this.panelStep3.TabIndex = 109;
+            // 
+            // checkBoxShowConfirmPassword
+            // 
+            this.checkBoxShowConfirmPassword.AutoSize = true;
+            this.checkBoxShowConfirmPassword.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.checkBoxShowConfirmPassword.Location = new System.Drawing.Point(600, 70);
+            this.checkBoxShowConfirmPassword.Name = "checkBoxShowConfirmPassword";
+            this.checkBoxShowConfirmPassword.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxShowConfirmPassword.TabIndex = 110;
+            this.checkBoxShowConfirmPassword.Text = "แสดงรหัสผ่าน";
+            this.checkBoxShowConfirmPassword.UseVisualStyleBackColor = true;
+            this.checkBoxShowConfirmPassword.CheckedChanged += new System.EventHandler(this.CheckBoxShowConfirmPassword_CheckedChanged);
+            // 
+            // checkBoxShowPassword
+            // 
+            this.checkBoxShowPassword.AutoSize = true;
+            this.checkBoxShowPassword.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.checkBoxShowPassword.Location = new System.Drawing.Point(600, 15);
+            this.checkBoxShowPassword.Name = "checkBoxShowPassword";
+            this.checkBoxShowPassword.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxShowPassword.TabIndex = 9;
+            this.checkBoxShowPassword.Text = "แสดงรหัสผ่าน";
+            this.checkBoxShowPassword.UseVisualStyleBackColor = true;
+            this.checkBoxShowPassword.CheckedChanged += new System.EventHandler(this.CheckBoxShowPassword_CheckedChanged);
             // 
             // buttonResetPassword
             // 
@@ -550,7 +579,7 @@ namespace Wearhouse
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 23);
+            this.label1.Location = new System.Drawing.Point(60, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 3;
@@ -574,7 +603,7 @@ namespace Wearhouse
             // 
             this.textBoxUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxUsername.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.textBoxUsername.Location = new System.Drawing.Point(120, 15);
+            this.textBoxUsername.Location = new System.Drawing.Point(112, 20);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(400, 24);
             this.textBoxUsername.TabIndex = 1;
@@ -583,7 +612,7 @@ namespace Wearhouse
             // 
             this.labelUsernameIcon.AutoSize = true;
             this.labelUsernameIcon.Font = new System.Drawing.Font("Tahoma", 14F);
-            this.labelUsernameIcon.Location = new System.Drawing.Point(78, 15);
+            this.labelUsernameIcon.Location = new System.Drawing.Point(22, 16);
             this.labelUsernameIcon.Name = "labelUsernameIcon";
             this.labelUsernameIcon.Size = new System.Drawing.Size(32, 23);
             this.labelUsernameIcon.TabIndex = 0;
@@ -606,6 +635,7 @@ namespace Wearhouse
             this.ClientSize = new System.Drawing.Size(750, 749);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รีเซ็ตรหัสผ่าน";
@@ -672,7 +702,8 @@ namespace Wearhouse
         private System.Windows.Forms.Label labelNewPasswordIcon;
         private System.Windows.Forms.Label labelConfirmPasswordIcon;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Label labelStatusMessage;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxShowConfirmPassword;
+        private System.Windows.Forms.CheckBox checkBoxShowPassword;
     }
 }

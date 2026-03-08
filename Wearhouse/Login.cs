@@ -37,8 +37,14 @@ namespace Wearhouse
             PasswordTB.Enter += PasswordTB_Enter;
             PasswordTB.Leave += PasswordTB_Leave;
 
+            // Center panel card in the form
+            CenterCardPanel();
+
             // เพิ่ม responsive helper
             ResponsiveHelper.EnableResponsive(this);
+
+            // Subscribe to resize event to keep card centered
+            this.Resize += (s, ev) => CenterCardPanel();
 
             // กด Enter เพื่อเข้าสู่ระบบ
             this.AcceptButton = this.LoginBT;
@@ -71,6 +77,16 @@ namespace Wearhouse
 
             // ตั้งค่าไอคอนดวงตาเริ่มต้น
             UpdateEyeIcon();
+        }
+
+        private void CenterCardPanel()
+        {
+            int cardWidth = panelCard.Width;
+            int cardHeight = panelCard.Height;
+            int x = (this.ClientSize.Width - cardWidth) / 2;
+            int y = (this.ClientSize.Height - cardHeight) / 2;
+            panelCard.Location = new Point(x, y);
+            panelCardShadow.Location = new Point(x + 4, y + 4);
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)

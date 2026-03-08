@@ -44,24 +44,24 @@
             this.textBoxSupplierId = new System.Windows.Forms.TextBox();
             this.buttonClear = new System.Windows.Forms.Button();
             this.dataGridViewSupplier = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.supplierBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.wearhouseDataSet2 = new Wearhouse.wearhouseDataSet2();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelTitle = new System.Windows.Forms.Label();
+            this.wearhouseDataSet = new Wearhouse.wearhouseDataSet();
+            this.supplierTableAdapter = new Wearhouse.wearhouseDataSetTableAdapters.supplierTableAdapter();
+            this.supplierTableAdapter1 = new Wearhouse.wearhouseDataSet2TableAdapters.supplierTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.wearhouseDataSet2 = new Wearhouse.wearhouseDataSet2();
-            this.wearhouseDataSet = new Wearhouse.wearhouseDataSet();
-            this.supplierTableAdapter = new Wearhouse.wearhouseDataSetTableAdapters.supplierTableAdapter();
-            this.supplierTableAdapter1 = new Wearhouse.wearhouseDataSet2TableAdapters.supplierTableAdapter();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSupplier)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +69,7 @@
             // 
             this.panelInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.panelInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelInput.Controls.Add(this.buttonClear);
             this.panelInput.Controls.Add(this.buttonAdd);
             this.panelInput.Controls.Add(this.label3);
             this.panelInput.Controls.Add(this.textBoxPhone);
@@ -89,7 +90,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(175)))), ((int)(((byte)(80)))));
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(622, 118);
+            this.buttonAdd.Location = new System.Drawing.Point(606, 118);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 35);
             this.buttonAdd.TabIndex = 8;
@@ -180,7 +181,7 @@
             this.buttonClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
             this.buttonClear.ForeColor = System.Drawing.Color.Black;
-            this.buttonClear.Location = new System.Drawing.Point(713, 164);
+            this.buttonClear.Location = new System.Drawing.Point(700, 118);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 35);
             this.buttonClear.TabIndex = 13;
@@ -220,6 +221,7 @@
             this.dataGridViewSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSupplier.Location = new System.Drawing.Point(0, 205);
             this.dataGridViewSupplier.Name = "dataGridViewSupplier";
+            this.dataGridViewSupplier.ReadOnly = true;
             this.dataGridViewSupplier.RowHeadersVisible = false;
             this.dataGridViewSupplier.RowTemplate.Height = 28;
             this.dataGridViewSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -228,21 +230,15 @@
             this.dataGridViewSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSupplier_CellClick);
             this.dataGridViewSupplier.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSupplier_CellContentClick);
             // 
-            // Column1
+            // supplierBindingSource1
             // 
-            this.Column1.HeaderText = "แก้ไข";
-            this.Column1.Name = "Column1";
-            this.Column1.Text = "แก้ไข";
-            this.Column1.UseColumnTextForButtonValue = true;
-            this.Column1.Width = 70;
+            this.supplierBindingSource1.DataMember = "supplier";
+            this.supplierBindingSource1.DataSource = this.wearhouseDataSet2;
             // 
-            // Column2
+            // wearhouseDataSet2
             // 
-            this.Column2.HeaderText = "ลบ";
-            this.Column2.Name = "Column2";
-            this.Column2.Text = "ลบ";
-            this.Column2.UseColumnTextForButtonValue = true;
-            this.Column2.Width = 70;
+            this.wearhouseDataSet2.DataSetName = "wearhouseDataSet2";
+            this.wearhouseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // labelTitle
             // 
@@ -258,43 +254,6 @@
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "จัดการซัพพลายเออร์";
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "supplier_id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "รหัส";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 40;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "supplier_name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "ชื่อ";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "supplier_address";
-            this.dataGridViewTextBoxColumn3.HeaderText = "ที่อยู่";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "supplier_phone";
-            this.dataGridViewTextBoxColumn4.HeaderText = "เบอร์โทร";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // supplierBindingSource1
-            // 
-            this.supplierBindingSource1.DataMember = "supplier";
-            this.supplierBindingSource1.DataSource = this.wearhouseDataSet2;
-            // 
-            // wearhouseDataSet2
-            // 
-            this.wearhouseDataSet2.DataSetName = "wearhouseDataSet2";
-            this.wearhouseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // wearhouseDataSet
             // 
             this.wearhouseDataSet.DataSetName = "wearhouseDataSet";
@@ -308,13 +267,61 @@
             // 
             this.supplierTableAdapter1.ClearBeforeFill = true;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "supplier_id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "รหัส";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "supplier_name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "ชื่อ";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "supplier_address";
+            this.dataGridViewTextBoxColumn3.HeaderText = "ที่อยู่";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "supplier_phone";
+            this.dataGridViewTextBoxColumn4.HeaderText = "เบอร์โทร";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 150;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "แก้ไข";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Text = "แก้ไข";
+            this.Column1.UseColumnTextForButtonValue = true;
+            this.Column1.Width = 70;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "ลบ";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Text = "ลบ";
+            this.Column2.UseColumnTextForButtonValue = true;
+            this.Column2.Width = 70;
+            // 
             // suppplierPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.dataGridViewSupplier);
             this.Controls.Add(this.panelInput);
             this.Controls.Add(this.labelTitle);
@@ -326,9 +333,9 @@
             this.panelInput.ResumeLayout(false);
             this.panelInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSupplier)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -40,6 +40,7 @@
             this.Quantitylabel = new System.Windows.Forms.Label();
             this.Namelabel = new System.Windows.Forms.Label();
             this.Idlabel = new System.Windows.Forms.Label();
+            this.receiveDateLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.badgeLabel = new System.Windows.Forms.Label();
             this.panelShadow.SuspendLayout();
@@ -69,6 +70,7 @@
             this.panel1.Controls.Add(this.Quantitylabel);
             this.panel1.Controls.Add(this.Namelabel);
             this.panel1.Controls.Add(this.Idlabel);
+            this.panel1.Controls.Add(this.receiveDateLabel);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.badgeLabel);
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -106,7 +108,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 148);
+            this.label1.Location = new System.Drawing.Point(25, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 7;
@@ -163,11 +165,24 @@
             // Idlabel
             // 
             this.Idlabel.AutoSize = true;
-            this.Idlabel.Location = new System.Drawing.Point(65, 148);
+            this.Idlabel.Location = new System.Drawing.Point(65, 133);
             this.Idlabel.Name = "Idlabel";
             this.Idlabel.Size = new System.Drawing.Size(18, 13);
             this.Idlabel.TabIndex = 1;
             this.Idlabel.Text = "ID";
+            // 
+            // receiveDateLabel
+            // 
+            this.receiveDateLabel.AutoSize = true;
+            this.receiveDateLabel.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.receiveDateLabel.ForeColor = System.Drawing.Color.Gray;
+            this.receiveDateLabel.Location = new System.Drawing.Point(70, 108);
+            this.receiveDateLabel.Name = "receiveDateLabel";
+            this.receiveDateLabel.Size = new System.Drawing.Size(85, 13);
+            this.receiveDateLabel.TabIndex = 12;
+            this.receiveDateLabel.Text = "dd/MM/yyyy";
+            this.receiveDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.receiveDateLabel.Visible = false;
             // 
             // pictureBox1
             // 
@@ -216,6 +231,7 @@
         private System.Windows.Forms.Label Quantitylabel;
         private System.Windows.Forms.Label Namelabel;
         private System.Windows.Forms.Label Idlabel;
+        private System.Windows.Forms.Label receiveDateLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button delbtn;
         private System.Windows.Forms.Button editbtn;
