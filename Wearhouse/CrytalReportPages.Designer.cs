@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrytalReportPages));
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.crystalReport11 = new Wearhouse.CrystalReport1();
             this.panelFilter = new System.Windows.Forms.Panel();
             this.labelFrom = new System.Windows.Forms.Label();
             this.labelTo = new System.Windows.Forms.Label();
@@ -43,7 +45,6 @@
             this.comboBoxProductType = new System.Windows.Forms.ComboBox();
             this.labelTransType = new System.Windows.Forms.Label();
             this.comboBoxTransType = new System.Windows.Forms.ComboBox();
-            this.crystalReport11 = new Wearhouse.CrystalReport1();
             this.panelFilter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,16 +103,16 @@
             // 
             // dateTimePickerFrom
             // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(75, 35);
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(66, 35);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
-            this.dateTimePickerFrom.Size = new System.Drawing.Size(120, 20);
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(129, 20);
             this.dateTimePickerFrom.TabIndex = 2;
             // 
             // dateTimePickerTo
             // 
-            this.dateTimePickerTo.Location = new System.Drawing.Point(280, 35);
+            this.dateTimePickerTo.Location = new System.Drawing.Point(267, 35);
             this.dateTimePickerTo.Name = "dateTimePickerTo";
-            this.dateTimePickerTo.Size = new System.Drawing.Size(120, 20);
+            this.dateTimePickerTo.Size = new System.Drawing.Size(133, 20);
             this.dateTimePickerTo.TabIndex = 4;
             // 
             // buttonFilter
@@ -209,6 +210,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.crystalReportViewer1);
             this.Controls.Add(this.panelFilter);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CrytalReportPages";
             this.Text = "CrytalReportPages";
             this.Load += new System.EventHandler(this.CrytalReportPages_Load);

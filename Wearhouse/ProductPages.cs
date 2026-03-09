@@ -542,25 +542,76 @@ namespace Wearhouse
 
         private void ButtonFilterPrice_Click(object sender, EventArgs e)
         {
-            PriceFilterForm priceFilterForm = new PriceFilterForm();
+            // Create a simple price filter dialog
+            Form priceFilterForm = new Form();
+            priceFilterForm.Text = "กรองตามราคา";
+            priceFilterForm.Size = new System.Drawing.Size(350, 180);
+            priceFilterForm.StartPosition = FormStartPosition.CenterParent;
+
+            Label labelMin = new Label() { Text = "ราคาน้อยสุด :", Location = new System.Drawing.Point(10, 20), AutoSize = true };
+            TextBox tbMin = new TextBox() { Location = new System.Drawing.Point(120, 20), Width = 200 };
+
+            Label labelMax = new Label() { Text = "ราคามากสุด :", Location = new System.Drawing.Point(10, 60), AutoSize = true };
+            TextBox tbMax = new TextBox() { Location = new System.Drawing.Point(120, 60), Width = 200 };
+
+            Button btnOK = new Button() { Text = "ตกลง", Location = new System.Drawing.Point(120, 110), Width = 90, DialogResult = DialogResult.OK };
+            Button btnCancel = new Button() { Text = "ยกเลิก", Location = new System.Drawing.Point(220, 110), Width = 90, DialogResult = DialogResult.Cancel };
+
+            priceFilterForm.Controls.Add(labelMin);
+            priceFilterForm.Controls.Add(tbMin);
+            priceFilterForm.Controls.Add(labelMax);
+            priceFilterForm.Controls.Add(tbMax);
+            priceFilterForm.Controls.Add(btnOK);
+            priceFilterForm.Controls.Add(btnCancel);
 
             if (priceFilterForm.ShowDialog(this) == DialogResult.OK)
             {
+                decimal minPrice = 0;
+                decimal maxPrice = decimal.MaxValue;
+
+                if (decimal.TryParse(tbMin.Text, out decimal min))
+                    minPrice = min;
+
+                if (decimal.TryParse(tbMax.Text, out decimal max))
+                    maxPrice = max;
+
                 allProducts = GetAllProductsAggregatedFromDatabase();
-                SetPriceRangeFilter(priceFilterForm.MinPrice, priceFilterForm.MaxPrice);
+                SetPriceRangeFilter(minPrice, maxPrice);
             }
         }
 
         private void ButtonFilterType_Click(object sender, EventArgs e)
         {
-            ProductTypeFilterForm typeFilterForm = new ProductTypeFilterForm(productTypes);
+            // Create a simple type filter dialog
+            Form typeFilterForm = new Form();
+            typeFilterForm.Text = "กรองตามประเภท";
+            typeFilterForm.Size = new System.Drawing.Size(350, 150);
+            typeFilterForm.StartPosition = FormStartPosition.CenterParent;
+
+            Label labelType = new Label() { Text = "เลือกประเภท :", Location = new System.Drawing.Point(10, 20), AutoSize = true };
+            ComboBox cbType = new ComboBox() { Location = new System.Drawing.Point(120, 20), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
+
+            cbType.Items.Add("");
+            foreach (var type in productTypes)
+            {
+                cbType.Items.Add(type);
+            }
+            cbType.SelectedIndex = 0;
+
+            Button btnOK = new Button() { Text = "ตกลง", Location = new System.Drawing.Point(120, 70), Width = 90, DialogResult = DialogResult.OK };
+            Button btnCancel = new Button() { Text = "ยกเลิก", Location = new System.Drawing.Point(220, 70), Width = 90, DialogResult = DialogResult.Cancel };
+
+            typeFilterForm.Controls.Add(labelType);
+            typeFilterForm.Controls.Add(cbType);
+            typeFilterForm.Controls.Add(btnOK);
+            typeFilterForm.Controls.Add(btnCancel);
 
             if (typeFilterForm.ShowDialog(this) == DialogResult.OK)
             {
                 allProducts = GetAllProductsAggregatedFromDatabase();
-                if (!string.IsNullOrEmpty(typeFilterForm.SelectedProductType))
+                if (!string.IsNullOrEmpty(cbType.SelectedItem.ToString()))
                 {
-                    SetProductTypeFilter(typeFilterForm.SelectedProductType);
+                    SetProductTypeFilter(cbType.SelectedItem.ToString());
                 }
                 else
                 {

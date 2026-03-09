@@ -90,11 +90,6 @@ namespace Wearhouse
             DrawCard(e, new Rectangle(0, 0, panel5.Width - 1, panel5.Height - 1), Color.FromArgb(240, 230, 255), Color.FromArgb(220, 200, 250));
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             ProductPages productPages = new ProductPages();

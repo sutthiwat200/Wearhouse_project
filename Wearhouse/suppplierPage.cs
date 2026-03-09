@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Wearhouse;
 
 namespace Wearhouse
 {
@@ -48,6 +49,37 @@ namespace Wearhouse
             else
             {
                 e.Handled = true;
+            }
+        }
+
+        private void DataGridViewSupplier_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0) return;
+
+                var dgv = dataGridViewSupplier;
+                dgv.RowHeadersVisible = false;
+                dgv.GridColor = Color.FromArgb(230, 230, 230);
+                dgv.BorderStyle = BorderStyle.None;
+                dgv.CellBorderStyle = DataGridViewCellBorderStyle.None;
+
+                // alternating row colors
+                if (e.RowIndex % 2 == 0)
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(245, 250, 255);
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.White;
+                }
+
+                e.CellStyle.SelectionBackColor = Color.FromArgb(197, 225, 245);
+                e.CellStyle.SelectionForeColor = Color.Black;
+            }
+            catch
+            {
+                // ignore formatting errors
             }
         }
 
@@ -221,6 +253,21 @@ namespace Wearhouse
                     }
                 }
             }
+        }
+
+        private void textBoxPhone_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxSupplierId_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelInput_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

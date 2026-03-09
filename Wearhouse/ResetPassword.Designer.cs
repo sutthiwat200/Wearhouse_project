@@ -34,9 +34,9 @@ namespace Wearhouse
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelMain = new System.Windows.Forms.Panel();
             this.labelStatusMessage = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.panelStep3 = new System.Windows.Forms.Panel();
             this.checkBoxShowConfirmPassword = new System.Windows.Forms.CheckBox();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxShowPassword = new System.Windows.Forms.CheckBox();
             this.buttonResetPassword = new System.Windows.Forms.Button();
             this.textBoxConfirmPassword = new System.Windows.Forms.TextBox();
@@ -75,6 +75,7 @@ namespace Wearhouse
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelUsernameIcon = new System.Windows.Forms.Label();
             this.labelStep1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelStep3.SuspendLayout();
@@ -92,7 +93,7 @@ namespace Wearhouse
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
             this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(750, 70);
+            this.panelTitle.Size = new System.Drawing.Size(752, 70);
             this.panelTitle.TabIndex = 0;
             // 
             // labelTitleIcon
@@ -126,6 +127,7 @@ namespace Wearhouse
             this.panelMain.Controls.Add(this.panelQuestion3);
             this.panelMain.Controls.Add(this.panelQuestion2);
             this.panelMain.Controls.Add(this.panelQuestion1);
+            this.panelMain.Controls.Add(this.label2);
             this.panelMain.Controls.Add(this.labelStep2Desc);
             this.panelMain.Controls.Add(this.labelStep2);
             this.panelMain.Controls.Add(this.panelStep1);
@@ -134,30 +136,17 @@ namespace Wearhouse
             this.panelMain.Location = new System.Drawing.Point(0, 70);
             this.panelMain.Name = "panelMain";
             this.panelMain.Padding = new System.Windows.Forms.Padding(20);
-            this.panelMain.Size = new System.Drawing.Size(750, 679);
+            this.panelMain.Size = new System.Drawing.Size(752, 746);
             this.panelMain.TabIndex = 1;
             // 
             // labelStatusMessage
             // 
             this.labelStatusMessage.AutoSize = true;
             this.labelStatusMessage.ForeColor = System.Drawing.Color.Red;
-            this.labelStatusMessage.Location = new System.Drawing.Point(20, 639);
+            this.labelStatusMessage.Location = new System.Drawing.Point(20, 697);
             this.labelStatusMessage.Name = "labelStatusMessage";
             this.labelStatusMessage.Size = new System.Drawing.Size(0, 13);
             this.labelStatusMessage.TabIndex = 111;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.BackColor = System.Drawing.Color.White;
-            this.buttonCancel.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonCancel.Location = new System.Drawing.Point(364, 131);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(170, 35);
-            this.buttonCancel.TabIndex = 110;
-            this.buttonCancel.Text = "ยกเลิก";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // panelStep3
             // 
@@ -176,7 +165,7 @@ namespace Wearhouse
             this.panelStep3.Controls.Add(this.labelNewPasswordIcon);
             this.panelStep3.Controls.Add(this.labelNewPassword);
             this.panelStep3.Enabled = false;
-            this.panelStep3.Location = new System.Drawing.Point(20, 485);
+            this.panelStep3.Location = new System.Drawing.Point(27, 521);
             this.panelStep3.Name = "panelStep3";
             this.panelStep3.Size = new System.Drawing.Size(710, 180);
             this.panelStep3.TabIndex = 109;
@@ -192,6 +181,19 @@ namespace Wearhouse
             this.checkBoxShowConfirmPassword.Text = "แสดงรหัสผ่าน";
             this.checkBoxShowConfirmPassword.UseVisualStyleBackColor = true;
             this.checkBoxShowConfirmPassword.CheckedChanged += new System.EventHandler(this.CheckBoxShowConfirmPassword_CheckedChanged);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.BackColor = System.Drawing.Color.White;
+            this.buttonCancel.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonCancel.Location = new System.Drawing.Point(364, 131);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(170, 35);
+            this.buttonCancel.TabIndex = 110;
+            this.buttonCancel.Text = "ยกเลิก";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // checkBoxShowPassword
             // 
@@ -300,7 +302,7 @@ namespace Wearhouse
             // 
             this.labelStep3.AutoSize = true;
             this.labelStep3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.labelStep3.Location = new System.Drawing.Point(20, 463);
+            this.labelStep3.Location = new System.Drawing.Point(27, 499);
             this.labelStep3.Name = "labelStep3";
             this.labelStep3.Size = new System.Drawing.Size(140, 19);
             this.labelStep3.TabIndex = 108;
@@ -312,7 +314,7 @@ namespace Wearhouse
             this.buttonVerifyAnswers.Enabled = false;
             this.buttonVerifyAnswers.Font = new System.Drawing.Font("Tahoma", 10F);
             this.buttonVerifyAnswers.ForeColor = System.Drawing.Color.White;
-            this.buttonVerifyAnswers.Location = new System.Drawing.Point(558, 444);
+            this.buttonVerifyAnswers.Location = new System.Drawing.Point(565, 480);
             this.buttonVerifyAnswers.Name = "buttonVerifyAnswers";
             this.buttonVerifyAnswers.Size = new System.Drawing.Size(170, 35);
             this.buttonVerifyAnswers.TabIndex = 107;
@@ -450,9 +452,9 @@ namespace Wearhouse
             this.labelQuestion2Header.ForeColor = System.Drawing.Color.White;
             this.labelQuestion2Header.Location = new System.Drawing.Point(10, 15);
             this.labelQuestion2Header.Name = "labelQuestion2Header";
-            this.labelQuestion2Header.Size = new System.Drawing.Size(150, 17);
+            this.labelQuestion2Header.Size = new System.Drawing.Size(217, 17);
             this.labelQuestion2Header.TabIndex = 0;
-            this.labelQuestion2Header.Text = "คำถาม 2: จะเลิกตั้งชื่อ";
+            this.labelQuestion2Header.Text = "คำถาม 2: [คำถาม 2 จะแสดงที่นี่]";
             this.labelQuestion2Header.Click += new System.EventHandler(this.LabelQuestion2Header_Click);
             // 
             // labelQuestion2Icon
@@ -524,9 +526,9 @@ namespace Wearhouse
             this.labelQuestion1Header.ForeColor = System.Drawing.Color.White;
             this.labelQuestion1Header.Location = new System.Drawing.Point(10, 15);
             this.labelQuestion1Header.Name = "labelQuestion1Header";
-            this.labelQuestion1Header.Size = new System.Drawing.Size(229, 17);
+            this.labelQuestion1Header.Size = new System.Drawing.Size(217, 17);
             this.labelQuestion1Header.TabIndex = 0;
-            this.labelQuestion1Header.Text = "คำถาม 1: โรงเรียนประถมของคุณ?";
+            this.labelQuestion1Header.Text = "คำถาม 1: [คำถาม 1 จะแสดงที่นี่]";
             this.labelQuestion1Header.Click += new System.EventHandler(this.LabelQuestion1Header_Click);
             // 
             // labelQuestion1Icon
@@ -628,11 +630,23 @@ namespace Wearhouse
             this.labelStep1.TabIndex = 100;
             this.labelStep1.Text = "1. ตรวจสอบบัญชีของคุณ";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.label2.Location = new System.Drawing.Point(565, 145);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 16);
+            this.label2.TabIndex = 103;
+            this.label2.Text = "เลือกตอบคำถามข้อใดก็ได้ 1 ข้อ";
+            // 
             // ResetPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 749);
+            this.ClientSize = new System.Drawing.Size(752, 816);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelTitle);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -705,5 +719,6 @@ namespace Wearhouse
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxShowConfirmPassword;
         private System.Windows.Forms.CheckBox checkBoxShowPassword;
+        private System.Windows.Forms.Label label2;
     }
 }

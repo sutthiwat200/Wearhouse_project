@@ -1,4 +1,4 @@
-﻿namespace Wearhouse
+namespace Wearhouse
 {
     partial class DateFilterForm
     {
@@ -41,9 +41,9 @@
             this.labelStart.AutoSize = true;
             this.labelStart.Location = new System.Drawing.Point(10, 20);
             this.labelStart.Name = "labelStart";
-            this.labelStart.Size = new System.Drawing.Size(52, 13);
+            this.labelStart.Size = new System.Drawing.Size(62, 13);
             this.labelStart.TabIndex = 0;
-            this.labelStart.Text = "จากวันที่ :";
+            this.labelStart.Text = "วันเริ่มต้น :";
             // 
             // dateTimePickerStart
             // 
@@ -57,9 +57,9 @@
             this.labelEnd.AutoSize = true;
             this.labelEnd.Location = new System.Drawing.Point(10, 60);
             this.labelEnd.Name = "labelEnd";
-            this.labelEnd.Size = new System.Drawing.Size(46, 13);
+            this.labelEnd.Size = new System.Drawing.Size(59, 13);
             this.labelEnd.TabIndex = 2;
-            this.labelEnd.Text = "ถึงวันที่ :";
+            this.labelEnd.Text = "วันสิ้นสุด :";
             // 
             // dateTimePickerEnd
             // 
@@ -75,7 +75,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(90, 30);
             this.buttonOK.TabIndex = 4;
-            this.buttonOK.Text = "กรอง";
+            this.buttonOK.Text = "ตกลง";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
@@ -106,7 +106,7 @@
             this.MinimizeBox = false;
             this.Name = "DateFilterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "กรองสินค้าตามวันที่";
+            this.Text = "กรองตามวันที่";
             this.Load += new System.EventHandler(this.DateFilterForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

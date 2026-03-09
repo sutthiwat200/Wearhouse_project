@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panelCard = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.userPanel = new System.Windows.Forms.Panel();
             this.userIcon = new System.Windows.Forms.PictureBox();
             this.UserNameTB = new System.Windows.Forms.TextBox();
@@ -44,21 +45,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelCardShadow = new System.Windows.Forms.Panel();
             this.panelCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.userPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userIcon)).BeginInit();
             this.passPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eyePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelCard
             // 
             this.panelCard.BackColor = System.Drawing.Color.White;
-            this.panelCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.panelCard.Controls.Add(this.pictureBox1);
             this.panelCard.Controls.Add(this.userPanel);
             this.panelCard.Controls.Add(this.userPanelShadow);
@@ -73,6 +73,16 @@
             this.panelCard.Name = "panelCard";
             this.panelCard.Size = new System.Drawing.Size(442, 374);
             this.panelCard.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(6, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 81);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // userPanel
             // 
@@ -222,16 +232,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "เข้าสู่ระบบ Wearhouse";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(10, -1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 81);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // panelCardShadow
             // 
             this.panelCardShadow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(224)))), ((int)(((byte)(230)))));
@@ -246,8 +246,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(1000, 640);
-            this.Controls.Add(this.panelCardShadow);
             this.Controls.Add(this.panelCard);
+            this.Controls.Add(this.panelCardShadow);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -255,6 +255,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelCard.ResumeLayout(false);
             this.panelCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.userPanel.ResumeLayout(false);
             this.userPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userIcon)).EndInit();
@@ -262,7 +263,6 @@
             this.passPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eyePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

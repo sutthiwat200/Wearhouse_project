@@ -32,18 +32,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(suppplierPage));
-            this.panelInput = new System.Windows.Forms.Panel();
+            this.panelInput = new Wearhouse.RoundedPanel();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxPhone = new System.Windows.Forms.TextBox();
+            this.textBoxPhone = new Wearhouse.CustomTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxAddress = new System.Windows.Forms.TextBox();
+            this.textBoxAddress = new Wearhouse.CustomTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxSupplierName = new System.Windows.Forms.TextBox();
+            this.textBoxSupplierName = new Wearhouse.CustomTextBox();
             this.labelId = new System.Windows.Forms.Label();
-            this.textBoxSupplierId = new System.Windows.Forms.TextBox();
-            this.buttonClear = new System.Windows.Forms.Button();
+            this.textBoxSupplierId = new Wearhouse.CustomTextBox();
             this.dataGridViewSupplier = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.supplierBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.wearhouseDataSet2 = new Wearhouse.wearhouseDataSet2();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -51,12 +57,6 @@
             this.wearhouseDataSet = new Wearhouse.wearhouseDataSet();
             this.supplierTableAdapter = new Wearhouse.wearhouseDataSetTableAdapters.supplierTableAdapter();
             this.supplierTableAdapter1 = new Wearhouse.wearhouseDataSet2TableAdapters.supplierTableAdapter();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource1)).BeginInit();
@@ -67,7 +67,8 @@
             // 
             // panelInput
             // 
-            this.panelInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.panelInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(245)))));
+            this.panelInput.BorderRadius = 18;
             this.panelInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelInput.Controls.Add(this.buttonClear);
             this.panelInput.Controls.Add(this.buttonAdd);
@@ -82,17 +83,37 @@
             this.panelInput.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelInput.Location = new System.Drawing.Point(0, 45);
             this.panelInput.Name = "panelInput";
-            this.panelInput.Size = new System.Drawing.Size(800, 160);
+            this.panelInput.Padding = new System.Windows.Forms.Padding(12);
+            this.panelInput.Size = new System.Drawing.Size(800, 175);
             this.panelInput.TabIndex = 1;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.buttonClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonClear.FlatAppearance.BorderSize = 0;
+            this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonClear.ForeColor = System.Drawing.Color.White;
+            this.buttonClear.Location = new System.Drawing.Point(700, 126);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(75, 32);
+            this.buttonClear.TabIndex = 13;
+            this.buttonClear.Text = "ล้าง";
+            this.buttonClear.UseVisualStyleBackColor = false;
+            this.buttonClear.Click += new System.EventHandler(this.ButtonClear_Click);
             // 
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(175)))), ((int)(((byte)(80)))));
-            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.buttonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAdd.FlatAppearance.BorderSize = 0;
+            this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(606, 118);
+            this.buttonAdd.Location = new System.Drawing.Point(606, 126);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 35);
+            this.buttonAdd.Size = new System.Drawing.Size(75, 32);
             this.buttonAdd.TabIndex = 8;
             this.buttonAdd.Text = "เพิ่ม";
             this.buttonAdd.UseVisualStyleBackColor = false;
@@ -103,7 +124,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.label3.Location = new System.Drawing.Point(420, 15);
+            this.label3.Location = new System.Drawing.Point(430, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 18);
             this.label3.TabIndex = 6;
@@ -111,11 +132,14 @@
             // 
             // textBoxPhone
             // 
+            this.textBoxPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.textBoxPhone.Location = new System.Drawing.Point(490, 12);
+            this.textBoxPhone.Location = new System.Drawing.Point(501, 16);
             this.textBoxPhone.Name = "textBoxPhone";
+            this.textBoxPhone.Placeholder = "กรอกเบอร์โทร";
             this.textBoxPhone.Size = new System.Drawing.Size(180, 24);
             this.textBoxPhone.TabIndex = 7;
+            this.textBoxPhone.TextChanged += new System.EventHandler(this.textBoxPhone_TextChanged);
             // 
             // label2
             // 
@@ -130,11 +154,13 @@
             // 
             // textBoxAddress
             // 
+            this.textBoxAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.textBoxAddress.Location = new System.Drawing.Point(70, 45);
+            this.textBoxAddress.Location = new System.Drawing.Point(70, 48);
             this.textBoxAddress.Multiline = true;
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(400, 60);
+            this.textBoxAddress.Placeholder = "กรอกที่อยู่";
+            this.textBoxAddress.Size = new System.Drawing.Size(600, 60);
             this.textBoxAddress.TabIndex = 5;
             // 
             // label1
@@ -142,7 +168,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.label1.Location = new System.Drawing.Point(180, 15);
+            this.label1.Location = new System.Drawing.Point(179, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 18);
             this.label1.TabIndex = 2;
@@ -150,9 +176,11 @@
             // 
             // textBoxSupplierName
             // 
+            this.textBoxSupplierName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.textBoxSupplierName.Location = new System.Drawing.Point(217, 12);
+            this.textBoxSupplierName.Location = new System.Drawing.Point(217, 16);
             this.textBoxSupplierName.Name = "textBoxSupplierName";
+            this.textBoxSupplierName.Placeholder = "กรอกชื่อซัพพลายเออร์";
             this.textBoxSupplierName.Size = new System.Drawing.Size(200, 24);
             this.textBoxSupplierName.TabIndex = 3;
             // 
@@ -161,7 +189,7 @@
             this.labelId.AutoSize = true;
             this.labelId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.labelId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.labelId.Location = new System.Drawing.Point(15, 15);
+            this.labelId.Location = new System.Drawing.Point(16, 18);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(40, 18);
             this.labelId.TabIndex = 0;
@@ -169,25 +197,14 @@
             // 
             // textBoxSupplierId
             // 
+            this.textBoxSupplierId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSupplierId.Enabled = false;
             this.textBoxSupplierId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.textBoxSupplierId.Location = new System.Drawing.Point(70, 12);
+            this.textBoxSupplierId.Location = new System.Drawing.Point(70, 16);
             this.textBoxSupplierId.Name = "textBoxSupplierId";
+            this.textBoxSupplierId.Placeholder = "";
             this.textBoxSupplierId.Size = new System.Drawing.Size(100, 24);
             this.textBoxSupplierId.TabIndex = 1;
-            // 
-            // buttonClear
-            // 
-            this.buttonClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            this.buttonClear.ForeColor = System.Drawing.Color.Black;
-            this.buttonClear.Location = new System.Drawing.Point(700, 118);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(75, 35);
-            this.buttonClear.TabIndex = 13;
-            this.buttonClear.Text = "ล้าง";
-            this.buttonClear.UseVisualStyleBackColor = false;
-            this.buttonClear.Click += new System.EventHandler(this.ButtonClear_Click);
             // 
             // dataGridViewSupplier
             // 
@@ -219,53 +236,18 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewSupplier.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewSupplier.Location = new System.Drawing.Point(0, 205);
+            this.dataGridViewSupplier.EnableHeadersVisualStyles = false;
+            this.dataGridViewSupplier.Location = new System.Drawing.Point(0, 220);
             this.dataGridViewSupplier.Name = "dataGridViewSupplier";
             this.dataGridViewSupplier.ReadOnly = true;
             this.dataGridViewSupplier.RowHeadersVisible = false;
-            this.dataGridViewSupplier.RowTemplate.Height = 28;
+            this.dataGridViewSupplier.RowTemplate.Height = 36;
             this.dataGridViewSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSupplier.Size = new System.Drawing.Size(800, 245);
+            this.dataGridViewSupplier.Size = new System.Drawing.Size(800, 230);
             this.dataGridViewSupplier.TabIndex = 2;
             this.dataGridViewSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSupplier_CellClick);
             this.dataGridViewSupplier.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSupplier_CellContentClick);
-            // 
-            // supplierBindingSource1
-            // 
-            this.supplierBindingSource1.DataMember = "supplier";
-            this.supplierBindingSource1.DataSource = this.wearhouseDataSet2;
-            // 
-            // wearhouseDataSet2
-            // 
-            this.wearhouseDataSet2.DataSetName = "wearhouseDataSet2";
-            this.wearhouseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
-            this.labelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.ForeColor = System.Drawing.Color.White;
-            this.labelTitle.Location = new System.Drawing.Point(0, 0);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Padding = new System.Windows.Forms.Padding(12, 8, 0, 8);
-            this.labelTitle.Size = new System.Drawing.Size(229, 45);
-            this.labelTitle.TabIndex = 0;
-            this.labelTitle.Text = "จัดการซัพพลายเออร์";
-            // 
-            // wearhouseDataSet
-            // 
-            this.wearhouseDataSet.DataSetName = "wearhouseDataSet";
-            this.wearhouseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // supplierTableAdapter
-            // 
-            this.supplierTableAdapter.ClearBeforeFill = true;
-            // 
-            // supplierTableAdapter1
-            // 
-            this.supplierTableAdapter1.ClearBeforeFill = true;
+            this.dataGridViewSupplier.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridViewSupplier_CellFormatting);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -316,6 +298,42 @@
             this.Column2.UseColumnTextForButtonValue = true;
             this.Column2.Width = 70;
             // 
+            // supplierBindingSource1
+            // 
+            this.supplierBindingSource1.DataMember = "supplier";
+            this.supplierBindingSource1.DataSource = this.wearhouseDataSet2;
+            // 
+            // wearhouseDataSet2
+            // 
+            this.wearhouseDataSet2.DataSetName = "wearhouseDataSet2";
+            this.wearhouseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.labelTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.ForeColor = System.Drawing.Color.White;
+            this.labelTitle.Location = new System.Drawing.Point(0, 0);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Padding = new System.Windows.Forms.Padding(18, 8, 0, 8);
+            this.labelTitle.Size = new System.Drawing.Size(800, 45);
+            this.labelTitle.TabIndex = 0;
+            this.labelTitle.Text = "จัดการซัพพลายเออร์";
+            // 
+            // wearhouseDataSet
+            // 
+            this.wearhouseDataSet.DataSetName = "wearhouseDataSet";
+            this.wearhouseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // supplierTableAdapter
+            // 
+            this.supplierTableAdapter.ClearBeforeFill = true;
+            // 
+            // supplierTableAdapter1
+            // 
+            this.supplierTableAdapter1.ClearBeforeFill = true;
+            // 
             // suppplierPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,21 +356,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panelInput;
+        private Wearhouse.RoundedPanel panelInput;
         private System.Windows.Forms.Label labelId;
-        private System.Windows.Forms.TextBox textBoxSupplierId;
+        private Wearhouse.CustomTextBox textBoxSupplierId;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxSupplierName;
+        private Wearhouse.CustomTextBox textBoxSupplierName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxAddress;
+        private Wearhouse.CustomTextBox textBoxAddress;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxPhone;
+        private Wearhouse.CustomTextBox textBoxPhone;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.DataGridView dataGridViewSupplier;
