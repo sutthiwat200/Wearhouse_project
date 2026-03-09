@@ -24,6 +24,8 @@ public partial class supplier
 
         this.lot = new HashSet<lot>();
 
+        this.transaction = new HashSet<transaction>();
+
     }
 
 
@@ -42,6 +44,10 @@ public partial class supplier
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<lot> lot { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<transaction> transaction { get; set; }
 
 }
 

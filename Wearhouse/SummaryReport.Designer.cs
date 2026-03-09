@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummaryReport));
             this.panelFilter = new System.Windows.Forms.Panel();
             this.buttonExport = new System.Windows.Forms.Button();
@@ -44,9 +45,13 @@
             this.panelSummary = new System.Windows.Forms.Panel();
             this.labelSummary = new System.Windows.Forms.Label();
             this.dataGridViewReport = new System.Windows.Forms.DataGridView();
+            this.wearhouseDataSet = new Wearhouse.wearhouseDataSet();
+            this.wearhouseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelFilter.SuspendLayout();
             this.panelSummary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelFilter
@@ -218,6 +223,16 @@
             this.dataGridViewReport.Size = new System.Drawing.Size(776, 192);
             this.dataGridViewReport.TabIndex = 3;
             // 
+            // wearhouseDataSet
+            // 
+            this.wearhouseDataSet.DataSetName = "wearhouseDataSet";
+            this.wearhouseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // wearhouseDataSetBindingSource
+            // 
+            this.wearhouseDataSetBindingSource.DataSource = this.wearhouseDataSet;
+            this.wearhouseDataSetBindingSource.Position = 0;
+            // 
             // SummaryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,6 +252,8 @@
             this.panelSummary.ResumeLayout(false);
             this.panelSummary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,5 +276,7 @@
         private System.Windows.Forms.Panel panelSummary;
         private System.Windows.Forms.Label labelSummary;
         private System.Windows.Forms.DataGridView dataGridViewReport;
+        private wearhouseDataSet wearhouseDataSet;
+        private System.Windows.Forms.BindingSource wearhouseDataSetBindingSource;
     }
 }

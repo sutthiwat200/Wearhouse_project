@@ -133,11 +133,11 @@
     <Compile Include="AddType.Designer.cs">
       <DependentUpon>AddType.cs</DependentUpon>
     </Compile>
-    <Compile Include="CrystalReport11.cs">
+    <Compile Include="CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="CrytalReportPages.cs">
       <SubType>Form</SubType>
@@ -286,6 +286,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>wearhouseDataSet2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="wearhouseDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wearhouseDataSet3.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WearhouseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -309,10 +314,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport11.cs</LastGenOutput>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CrytalReportPages.resx">
       <DependentUpon>CrytalReportPages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateFilterForm.resx">
+      <DependentUpon>DateFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditProduct.resx">
       <DependentUpon>EditProduct.cs</DependentUpon>
@@ -403,6 +411,17 @@
     </None>
     <None Include="wearhouseDataSet2.xss">
       <DependentUpon>wearhouseDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="wearhouseDataSet3.xsc">
+      <DependentUpon>wearhouseDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="wearhouseDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>wearhouseDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wearhouseDataSet3.xss">
+      <DependentUpon>wearhouseDataSet3.xsd</DependentUpon>
     </None>
     <None Include="WearhouseModel.edmx.diagram">
       <DependentUpon>WearhouseModel.edmx</DependentUpon>

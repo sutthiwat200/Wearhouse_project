@@ -51,24 +51,57 @@ namespace Wearhouse
         {
             try
             {
-                flowLayoutPanelProducts.Controls.Clear();
-                
-                using (wearhouseEntities context = new wearhouseEntities())
+                if (flowLayoutPanelProducts == null) return;
+
+                flowLayoutPanelProducts.SuspendLayout();
+                try
                 {
-                    var products = context.product.ToList();
+                    flowLayoutPanelProducts.Controls.Clear();
 
-                    foreach (var product in products)
+                    using (wearhouseEntities context = new wearhouseEntities())
                     {
-                        var productButton = CreateProductButton(new ProductItem
+                        // enable double buffering
+                        try
                         {
-                            Id = product.product_id,
-                            Name = product.product_name,
-                            UnitPrice = product.product_unitprice ?? 0,
-                            ImageData = product.product_image
-                        });
+                            var prop = typeof(Panel).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                            if (prop != null)
+                                prop.SetValue(flowLayoutPanelProducts, true, null);
+                        }
+                        catch { }
 
-                        flowLayoutPanelProducts.Controls.Add(productButton);
+                        // Load products with minimal fields in one query
+                        var products = context.product
+                            .AsNoTracking()
+                            .Select(p => new
+                            {
+                                p.product_id,
+                                p.product_name,
+                                UnitPrice = p.product_unitprice,
+                                p.product_image
+                            })
+                            .ToList();
+
+                        var controlsToAdd = new List<Control>(products.Count);
+
+                        foreach (var p in products)
+                        {
+                            var productButton = CreateProductButton(new ProductItem
+                            {
+                                Id = p.product_id,
+                                Name = p.product_name,
+                                UnitPrice = p.UnitPrice ?? 0,
+                                ImageData = p.product_image
+                            });
+
+                            controlsToAdd.Add(productButton);
+                        }
+
+                        flowLayoutPanelProducts.Controls.AddRange(controlsToAdd.ToArray());
                     }
+                }
+                finally
+                {
+                    flowLayoutPanelProducts.ResumeLayout();
                 }
             }
             catch (Exception ex)
@@ -101,8 +134,10 @@ namespace Wearhouse
                 {
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream(product.ImageData))
                     {
-                        Image productImage = Image.FromStream(ms);
-                        pb.Image = new System.Drawing.Bitmap(productImage);
+                        using (var img = Image.FromStream(ms))
+                        {
+                            pb.Image = new Bitmap(img);
+                        }
                     }
                 }
                 catch
@@ -157,8 +192,10 @@ namespace Wearhouse
                 {
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream(product.ImageData))
                     {
-                        Image productImage = Image.FromStream(ms);
-                        pictureBoxLargeProduct.Image = new System.Drawing.Bitmap(productImage);
+                        using (var img = Image.FromStream(ms))
+                        {
+                            pictureBoxLargeProduct.Image = new Bitmap(img);
+                        }
                     }
                 }
                 else
@@ -188,7 +225,7 @@ namespace Wearhouse
 
                 using (wearhouseEntities context = new wearhouseEntities())
                 {
-                    var suppliers = context.supplier.ToList();
+                    var suppliers = context.supplier.AsNoTracking().Select(s => new { s.supplier_id, s.supplier_name }).ToList();
 
                     foreach (var supplier in suppliers)
                     {
@@ -225,7 +262,7 @@ namespace Wearhouse
 
                 if (string.IsNullOrWhiteSpace(textBoxQuantity.Text) || !int.TryParse(textBoxQuantity.Text, out int quantity) || quantity <= 0)
                 {
-                    MessageBox.Show("กรุณาใส่จำนวนที่ถูกต้อง (มากกว่า 0)", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("กรุณาใส่จำนวนที่ถูกต้อง (มากกว่า 0)", "ข้อผิดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -235,9 +272,13 @@ namespace Wearhouse
 
                 using (wearhouseEntities context = new wearhouseEntities())
                 {
+                    SupplierItem selectedSupplier = (SupplierItem)comboBoxSupplier.SelectedItem;
+
+                    // บันทึก transaction พร้อม supplier_id
                     transaction newTransaction = new transaction
                     {
                         product_id = selectedProduct.Id,
+                        supplier_id = selectedSupplier.Id,  // เพิ่มการบันทึก supplier_id
                         trans_date_time = dateTimePickerDate.Value,
                         trans_type = 1,
                         trans_reason = reason,
@@ -247,8 +288,6 @@ namespace Wearhouse
                     };
 
                     context.transaction.Add(newTransaction);
-
-                    SupplierItem selectedSupplier = (SupplierItem)comboBoxSupplier.SelectedItem;
 
                     // Create lot record
                     lot newLot = new lot
@@ -334,8 +373,19 @@ namespace Wearhouse
                 using (wearhouseEntities context = new wearhouseEntities())
                 {
                     var transactions = context.transaction
+                        .AsNoTracking()
                         .Where(t => t.trans_type == 1)
                         .OrderByDescending(t => t.trans_date_time)
+                        .Select(t => new
+                        {
+                            Id = t.trans_id,
+                            Date = t.trans_date_time,
+                            ProductName = t.product != null ? t.product.product_name : "ไม่พบสินค้า",
+                            Qty = t.trans_qty,
+                            UnitPrice = t.trans_unit_price,
+                            Total = t.trans_total_amount,
+                            Reason = t.trans_reason
+                        })
                         .ToList();
 
                     if (transactions.Count == 0)
@@ -344,25 +394,25 @@ namespace Wearhouse
                         return;
                     }
 
-                    var transactionData = transactions
-                        .Select(t => new
-                        {
-                            รหัส = t.trans_id,
-                            วันที่ = t.trans_date_time.ToString("dd/MM/yyyy HH:mm"),
-                            สินค้า = t.product != null ? t.product.product_name : "ไม่พบสินค้า",
-                            จำนวน = t.trans_qty,
-                            ราคาต่อหน่วย = t.trans_unit_price,
-                            ราคารวม = t.trans_total_amount,
-                            หมายเหตุ = t.trans_reason ?? ""
-                        }).ToList();
+                    var transactionData = transactions.Select(t => new
+                    {
+                        รหัส = t.Id,
+                        วันที่ = ((DateTime)t.Date).ToString("dd/MM/yyyy HH:mm"),
+                        สินค้า = t.ProductName,
+                        จำนวน = t.Qty,
+                        ราคาต่อหน่วย = t.UnitPrice,
+                        ราคารวม = t.Total,
+                        หมายเหตุ = t.Reason ?? ""
+                    }).ToList();
 
+                    dataGridViewTransactions.SuspendLayout();
                     dataGridViewTransactions.DataSource = transactionData;
                     dataGridViewTransactions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    
+
                     // ตั้งค่า row height
                     dataGridViewTransactions.RowTemplate.Height = 35;
                     dataGridViewTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                    
+
                     foreach (DataGridViewColumn column in dataGridViewTransactions.Columns)
                     {
                         if (column.Name == "ราคาต่อหน่วย" || column.Name == "ราคารวม")
@@ -379,6 +429,7 @@ namespace Wearhouse
                             column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
                         }
                     }
+                    dataGridViewTransactions.ResumeLayout();
                 }
             }
             catch (Exception ex)

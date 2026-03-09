@@ -45,6 +45,8 @@
             this.comboBoxProductType = new System.Windows.Forms.ComboBox();
             this.labelTransType = new System.Windows.Forms.Label();
             this.comboBoxTransType = new System.Windows.Forms.ComboBox();
+            this.labelSupplierName = new System.Windows.Forms.Label();
+            this.comboBoxSupplierName = new System.Windows.Forms.ComboBox();
             this.panelFilter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,9 +56,9 @@
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 130);
+            this.crystalReportViewer1.Location = new System.Drawing.Point(0, 131);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(800, 320);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(800, 319);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
@@ -76,10 +78,12 @@
             this.panelFilter.Controls.Add(this.comboBoxProductType);
             this.panelFilter.Controls.Add(this.labelTransType);
             this.panelFilter.Controls.Add(this.comboBoxTransType);
+            this.panelFilter.Controls.Add(this.labelSupplierName);
+            this.panelFilter.Controls.Add(this.comboBoxSupplierName);
             this.panelFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFilter.Location = new System.Drawing.Point(0, 0);
             this.panelFilter.Name = "panelFilter";
-            this.panelFilter.Size = new System.Drawing.Size(800, 130);
+            this.panelFilter.Size = new System.Drawing.Size(800, 131);
             this.panelFilter.TabIndex = 1;
             this.panelFilter.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFilter_Paint);
             // 
@@ -119,7 +123,7 @@
             // 
             this.buttonFilter.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonFilter.ForeColor = System.Drawing.Color.White;
-            this.buttonFilter.Location = new System.Drawing.Point(484, 100);
+            this.buttonFilter.Location = new System.Drawing.Point(490, 95);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonFilter.TabIndex = 5;
@@ -131,7 +135,7 @@
             // 
             this.buttonClear.BackColor = System.Drawing.Color.Gray;
             this.buttonClear.ForeColor = System.Drawing.Color.White;
-            this.buttonClear.Location = new System.Drawing.Point(565, 100);
+            this.buttonClear.Location = new System.Drawing.Point(565, 95);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 6;
@@ -203,6 +207,24 @@
             this.comboBoxTransType.Size = new System.Drawing.Size(120, 21);
             this.comboBoxTransType.TabIndex = 12;
             // 
+            // labelSupplierName
+            // 
+            this.labelSupplierName.AutoSize = true;
+            this.labelSupplierName.Location = new System.Drawing.Point(10, 95);
+            this.labelSupplierName.Name = "labelSupplierName";
+            this.labelSupplierName.Size = new System.Drawing.Size(74, 13);
+            this.labelSupplierName.TabIndex = 13;
+            this.labelSupplierName.Text = "ซัพพลายเออร์:";
+            // 
+            // comboBoxSupplierName
+            // 
+            this.comboBoxSupplierName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSupplierName.FormattingEnabled = true;
+            this.comboBoxSupplierName.Location = new System.Drawing.Point(129, 92);
+            this.comboBoxSupplierName.Name = "comboBoxSupplierName";
+            this.comboBoxSupplierName.Size = new System.Drawing.Size(150, 21);
+            this.comboBoxSupplierName.TabIndex = 14;
+            // 
             // CrytalReportPages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,5 +260,7 @@
         private System.Windows.Forms.ComboBox comboBoxProductType;
         private System.Windows.Forms.Label labelTransType;
         private System.Windows.Forms.ComboBox comboBoxTransType;
+        private System.Windows.Forms.Label labelSupplierName;
+        private System.Windows.Forms.ComboBox comboBoxSupplierName;
     }
 }

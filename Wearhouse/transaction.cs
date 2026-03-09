@@ -34,9 +34,13 @@ public partial class transaction
 
     public Nullable<decimal> trans_total_amount { get; set; }
 
+    public Nullable<int> supplier_id { get; set; }
+
 
 
     public virtual product product { get; set; }
+
+    public virtual supplier supplier { get; set; }
 
 }
 

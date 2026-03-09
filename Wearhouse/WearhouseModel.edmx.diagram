@@ -17,6 +17,7 @@
         <AssociationConnector Association="wearhouseModel.FK_transaction_product1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="wearhouseModel.verify_question" Width="1.5" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="wearhouseModel.userPass" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="wearhouseModel.FK_transaction_supplier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -65,6 +65,15 @@ namespace Wearhouse
             flowLayoutPanel.WrapContents = true;
             flowLayoutPanel.Padding = new Padding(10);
 
+            // Enable double buffering to reduce flicker
+            try
+            {
+                var prop = typeof(Panel).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (prop != null)
+                    prop.SetValue(flowLayoutPanel, true, null);
+            }
+            catch { }
+
             // Add to showproductpanel
             showproductpanel.Controls.Add(flowLayoutPanel);
         }
@@ -87,7 +96,7 @@ namespace Wearhouse
             {
                 using (wearhouseEntities db = new wearhouseEntities())
                 {
-                    productTypes = db.producttype.Select(t => t.producttype_name).ToList();
+                    productTypes = db.producttype.AsNoTracking().Select(t => t.producttype_name).ToList();
                 }
             }
             catch (Exception ex)
@@ -177,95 +186,97 @@ namespace Wearhouse
 
         private void RefreshProductDisplay(string searchTerm)
         {
-            // Clear current controls
-            flowLayoutPanel.Controls.Clear();
+            if (flowLayoutPanel == null) return;
 
-            // Filter products based on search term and active filters
-            List<ProductData> filteredProducts = allProducts;
+            // Suspend layout to improve performance while updating controls
+            flowLayoutPanel.SuspendLayout();
+            try
+            {
+                flowLayoutPanel.Controls.Clear();
 
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                filteredProducts = filteredProducts.Where(p =>
-                    p.Id.ToString().Contains(searchTerm) ||
-                    p.Name.ToLower().Contains(searchTerm)
-                ).ToList();
-            }
+                // Filter products based on search term and active filters
+                List<ProductData> filteredProducts = allProducts;
 
-            // Apply date range filter
-            // Note: Date filtering is already done at the data source level in GetProductsByDateRange()
-            // This code is kept for backward compatibility with other filter combinations
-            // Date filtering in RefreshProductDisplay is no longer needed as data is pre-filtered
-
-            // Apply price filter
-            if (filterMinPrice.HasValue)
-            {
-                filteredProducts = filteredProducts.Where(p => p.Price >= filterMinPrice.Value).ToList();
-            }
-            if (filterMaxPrice.HasValue)
-            {
-                filteredProducts = filteredProducts.Where(p => p.Price <= filterMaxPrice.Value).ToList();
-            }
-
-            // Apply product type filter
-            if (!string.IsNullOrEmpty(filterProductType))
-            {
-                filteredProducts = filteredProducts.Where(p => p.Type == filterProductType).ToList();
-            }
-
-            // Display filtered products
-            if (filteredProducts.Count == 0)
-            {
-                Label noResultLabel = new Label();
-                noResultLabel.Text = "ไม่พบสินค้า";
-                noResultLabel.AutoSize = true;
-                noResultLabel.Padding = new Padding(10);
-                flowLayoutPanel.Controls.Add(noResultLabel);
-            }
-            else
-            {
-                foreach (var product in filteredProducts)
+                if (!string.IsNullOrEmpty(searchTerm))
                 {
-                    ProductCard card = new ProductCard();
-
-                    // แสดงเฉพาะชื่อสินค้า
-                    string displayName = product.Name;
-
-                    card.SetProductData(product.Id, displayName, product.Quantity, product.Price, product.Image);
-
-                    // แสดงวันที่รับเข้าเมื่อมีการกรองวันที่
-                    if (filterStartDate.HasValue && filterEndDate.HasValue)
-                    {
-                        card.SetReceiveDate(product.ReceiveDate);
-                    }
-
-                    // Show "New" badge if product received within last 1 day
-                    bool isNew = false;
-                    try
-                    {
-                        if (product.ReceiveDate > DateTime.MinValue)
-                        {
-                            var age = DateTime.Now - product.ReceiveDate;
-                            if (age.TotalDays <= 1)
-                                isNew = true;
-                        }
-                    }
-                    catch { }
-                    card.SetIsNew(isNew);
-
-                    // Subscribe to ProductDeleted event
-                    card.ProductDeleted += (s, e) =>
-                    {
-                        LoadProducts();  // Refresh products after deletion
-                    };
-
-                    // Subscribe to ProductUpdated event
-                    card.ProductUpdated += (s, e) =>
-                    {
-                        LoadProducts();  // Refresh products after update
-                    };
-
-                    flowLayoutPanel.Controls.Add(card);
+                    filteredProducts = filteredProducts.Where(p =>
+                        p.Id.ToString().Contains(searchTerm) ||
+                        (!string.IsNullOrEmpty(p.Name) && p.Name.ToLower().Contains(searchTerm))
+                    ).ToList();
                 }
+
+                // Apply price filter
+                if (filterMinPrice.HasValue)
+                {
+                    filteredProducts = filteredProducts.Where(p => p.Price >= filterMinPrice.Value).ToList();
+                }
+                if (filterMaxPrice.HasValue)
+                {
+                    filteredProducts = filteredProducts.Where(p => p.Price <= filterMaxPrice.Value).ToList();
+                }
+
+                // Apply product type filter
+                if (!string.IsNullOrEmpty(filterProductType))
+                {
+                    filteredProducts = filteredProducts.Where(p => p.Type == filterProductType).ToList();
+                }
+
+                // Display filtered products
+                if (filteredProducts.Count == 0)
+                {
+                    Label noResultLabel = new Label();
+                    noResultLabel.Text = "ไม่พบสินค้า";
+                    noResultLabel.AutoSize = true;
+                    noResultLabel.Padding = new Padding(10);
+                    flowLayoutPanel.Controls.Add(noResultLabel);
+                }
+                else
+                {
+                    // Build controls into a list then add to the panel to reduce layout passes
+                    var controlsToAdd = new List<Control>(filteredProducts.Count);
+
+                    foreach (var product in filteredProducts)
+                    {
+                        ProductCard card = new ProductCard();
+
+                        // แสดงเฉพาะชื่อสินค้า
+                        string displayName = product.Name;
+
+                        card.SetProductData(product.Id, displayName, product.Quantity, product.Price, product.Image);
+
+                        // แสดงวันที่รับเข้าเมื่อมีการกรองวันที่
+                        if (filterStartDate.HasValue && filterEndDate.HasValue)
+                        {
+                            card.SetReceiveDate(product.ReceiveDate);
+                        }
+
+                        // Show "New" badge if product received within last 1 day
+                        bool isNew = false;
+                        try
+                        {
+                            if (product.ReceiveDate > DateTime.MinValue)
+                            {
+                                var age = DateTime.Now - product.ReceiveDate;
+                                if (age.TotalDays <= 1)
+                                    isNew = true;
+                            }
+                        }
+                        catch { }
+                        card.SetIsNew(isNew);
+
+                        // Subscribe to ProductDeleted/Updated events to refresh list
+                        card.ProductDeleted += (s, e) => { LoadProducts(); };
+                        card.ProductUpdated += (s, e) => { LoadProducts(); };
+
+                        controlsToAdd.Add(card);
+                    }
+
+                    flowLayoutPanel.Controls.AddRange(controlsToAdd.ToArray());
+                }
+            }
+            finally
+            {
+                flowLayoutPanel.ResumeLayout();
             }
         }
 
@@ -283,56 +294,57 @@ namespace Wearhouse
 
         private List<ProductData> GetAllProductsFromDatabase()
         {
-            List<ProductData> products = new List<ProductData>();
+            var products = new List<ProductData>();
 
             using (wearhouseEntities db = new wearhouseEntities())
             {
-                // Get all lots (stock in records) instead of just products
-                var lotList = db.lot.ToList();
+                // Load lots with their product and product type in a single projection
+                var lotProj = db.lot
+                    .AsNoTracking()
+                    .Select(l => new
+                    {
+                        LotBalance = l.lot_balance_qty,
+                        l.lot_receive_date,
+                        Product = l.product == null ? null : new
+                        {
+                            l.product.product_id,
+                            l.product.product_name,
+                            UnitPrice = l.product.product_unitprice,
+                            l.product.product_image,
+                            ProductTypeName = l.product.producttype == null ? "" : l.product.producttype.producttype_name
+                        }
+                    })
+                    .ToList();
 
-                foreach (var lot in lotList)
+                foreach (var lot in lotProj)
                 {
-                    var item = lot.product;
-
+                    var item = lot.Product;
                     if (item == null) continue;
 
                     Image productImage = null;
-
-                    // Convert byte array to Image
                     if (item.product_image != null && item.product_image.Length > 0)
                     {
                         try
                         {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(item.product_image))
+                            using (var ms = new System.IO.MemoryStream(item.product_image))
                             {
-                                productImage = Image.FromStream(ms);
-                                productImage = new Bitmap(productImage);
+                                using (var img = Image.FromStream(ms))
+                                {
+                                    productImage = new Bitmap(img);
+                                }
                             }
                         }
-                        catch
-                        {
-                            productImage = null;
-                        }
+                        catch { productImage = null; }
                     }
-
-                    // Get product type
-                    string productType = "";
-                    try
-                    {
-                        var type = db.producttype.FirstOrDefault(t => t.producttype_id == item.producttype_id);
-                        if (type != null)
-                            productType = type.producttype_name;
-                    }
-                    catch { }
 
                     products.Add(new ProductData
                     {
                         Id = item.product_id,
                         Name = item.product_name,
-                        Quantity = lot.lot_balance_qty ?? 0,
-                        Price = item.product_unitprice ?? 0,
+                        Quantity = lot.LotBalance ?? 0,
+                        Price = item.UnitPrice ?? 0,
                         Image = productImage,
-                        Type = productType,
+                        Type = item.ProductTypeName,
                         ReceiveDate = lot.lot_receive_date
                     });
                 }
@@ -343,63 +355,60 @@ namespace Wearhouse
 
         private List<ProductData> GetProductsByDateRange(DateTime startDate, DateTime endDate)
         {
-            List<ProductData> products = new List<ProductData>();
+            var products = new List<ProductData>();
 
             using (wearhouseEntities db = new wearhouseEntities())
             {
-                // Convert to date only (remove time portion) then expand to full day range
-                DateTime startOfDay = startDate.Date;  // 00:00:00
-                DateTime endOfNextDay = endDate.Date.AddDays(1);  // Next day at 00:00:00
+                DateTime startOfDay = startDate.Date;
+                DateTime endOfNextDay = endDate.Date.AddDays(1);
 
-                // Get only lots within the specified date range (inclusive)
-                var lotList = db.lot
-                    .Where(l => l.lot_receive_date >= startOfDay && 
-                                l.lot_receive_date < endOfNextDay)
+                var lotProj = db.lot
+                    .AsNoTracking()
+                    .Where(l => l.lot_receive_date >= startOfDay && l.lot_receive_date < endOfNextDay)
+                    .Select(l => new
+                    {
+                        LotBalance = l.lot_balance_qty,
+                        l.lot_receive_date,
+                        Product = l.product == null ? null : new
+                        {
+                            l.product.product_id,
+                            l.product.product_name,
+                            UnitPrice = l.product.product_unitprice,
+                            l.product.product_image,
+                            ProductTypeName = l.product.producttype == null ? "" : l.product.producttype.producttype_name
+                        }
+                    })
                     .ToList();
 
-                foreach (var lot in lotList)
+                foreach (var lot in lotProj)
                 {
-                    var item = lot.product;
-
+                    var item = lot.Product;
                     if (item == null) continue;
 
                     Image productImage = null;
-
-                    // Convert byte array to Image
                     if (item.product_image != null && item.product_image.Length > 0)
                     {
                         try
                         {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(item.product_image))
+                            using (var ms = new System.IO.MemoryStream(item.product_image))
                             {
-                                productImage = Image.FromStream(ms);
-                                productImage = new Bitmap(productImage);
+                                using (var img = Image.FromStream(ms))
+                                {
+                                    productImage = new Bitmap(img);
+                                }
                             }
                         }
-                        catch
-                        {
-                            productImage = null;
-                        }
+                        catch { productImage = null; }
                     }
-
-                    // Get product type
-                    string productType = "";
-                    try
-                    {
-                        var type = db.producttype.FirstOrDefault(t => t.producttype_id == item.producttype_id);
-                        if (type != null)
-                            productType = type.producttype_name;
-                    }
-                    catch { }
 
                     products.Add(new ProductData
                     {
                         Id = item.product_id,
                         Name = item.product_name,
-                        Quantity = lot.lot_balance_qty ?? 0,
-                        Price = item.product_unitprice ?? 0,
+                        Quantity = lot.LotBalance ?? 0,
+                        Price = item.UnitPrice ?? 0,
                         Image = productImage,
-                        Type = productType,
+                        Type = item.ProductTypeName,
                         ReceiveDate = lot.lot_receive_date
                     });
                 }
@@ -410,75 +419,63 @@ namespace Wearhouse
 
         private List<ProductData> GetAllProductsAggregatedFromDatabase()
         {
-            List<ProductData> products = new List<ProductData>();
+            var products = new List<ProductData>();
 
             using (wearhouseEntities db = new wearhouseEntities())
             {
-                // Group by product to get total quantities from all lots
-                var productList = db.product.ToList();
+                // Project products with their lots and type in one call to avoid N+1 queries
+                var prodProj = db.product
+                    .AsNoTracking()
+                    .Select(p => new
+                    {
+                        p.product_id,
+                        p.product_name,
+                        UnitPrice = p.product_unitprice,
+                        p.product_image,
+                        ProductTypeName = p.producttype == null ? "" : p.producttype.producttype_name,
+                        Lots = p.lot.Select(l => new { l.lot_balance_qty, l.lot_receive_date })
+                    })
+                    .ToList();
 
-                foreach (var item in productList)
+                foreach (var item in prodProj)
                 {
-                    Image productImage = null;
+                    int totalStock = 0;
+                    DateTime latestReceive = DateTime.MinValue;
 
-                    // Convert byte array to Image
+                    foreach (var l in item.Lots)
+                    {
+                        totalStock += l.lot_balance_qty ?? 0;
+                        if (l.lot_receive_date > latestReceive) latestReceive = l.lot_receive_date;
+                    }
+
+                    if (totalStock <= 0) continue;
+
+                    Image productImage = null;
                     if (item.product_image != null && item.product_image.Length > 0)
                     {
                         try
                         {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(item.product_image))
+                            using (var ms = new System.IO.MemoryStream(item.product_image))
                             {
-                                productImage = Image.FromStream(ms);
-                                productImage = new Bitmap(productImage);
+                                using (var img = Image.FromStream(ms))
+                                {
+                                    productImage = new Bitmap(img);
+                                }
                             }
                         }
-                        catch
-                        {
-                            productImage = null;
-                        }
+                        catch { productImage = null; }
                     }
 
-                    // Calculate total stock from all lots for this product
-                    int totalStock = db.lot
-                        .Where(l => l.product_id == item.product_id)
-                        .Sum(l => (int?)l.lot_balance_qty) ?? 0;
-
-                    // Get product type
-                    string productType = "";
-                    try
+                    products.Add(new ProductData
                     {
-                        var type = db.producttype.FirstOrDefault(t => t.producttype_id == item.producttype_id);
-                        if (type != null)
-                            productType = type.producttype_name;
-                    }
-                    catch { }
-
-                    // Get the latest receive date for this product
-                    DateTime receiveDate = DateTime.MinValue;
-                    var latestLot = db.lot
-                        .Where(l => l.product_id == item.product_id)
-                        .OrderByDescending(l => l.lot_receive_date)
-                        .FirstOrDefault();
-                    
-                    if (latestLot != null)
-                    {
-                        receiveDate = latestLot.lot_receive_date;
-                    }
-
-                    // Only add if there's stock available
-                    if (totalStock > 0)
-                    {
-                        products.Add(new ProductData
-                        {
-                            Id = item.product_id,
-                            Name = item.product_name,
-                            Quantity = totalStock,
-                            Price = item.product_unitprice ?? 0,
-                            Image = productImage,
-                            Type = productType,
-                            ReceiveDate = receiveDate
-                        });
-                    }
+                        Id = item.product_id,
+                        Name = item.product_name,
+                        Quantity = totalStock,
+                        Price = item.UnitPrice ?? 0,
+                        Image = productImage,
+                        Type = item.ProductTypeName,
+                        ReceiveDate = latestReceive
+                    });
                 }
             }
 

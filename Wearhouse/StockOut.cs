@@ -48,34 +48,79 @@ namespace Wearhouse
         {
             try
             {
-                flowLayoutPanelProducts.Controls.Clear();
-                
-                using (wearhouseEntities context = new wearhouseEntities())
+                if (flowLayoutPanelProducts == null) return;
+
+                // improve layout performance
+                flowLayoutPanelProducts.SuspendLayout();
+                try
                 {
-                    var products = context.product.ToList();
+                    flowLayoutPanelProducts.Controls.Clear();
 
-                    foreach (var product in products)
+                    using (wearhouseEntities context = new wearhouseEntities())
                     {
-                        // Calculate stock from lot balance quantities
-                        int totalStock = context.lot
-                            .Where(l => l.product_id == product.product_id)
-                            .Sum(l => (int?)l.lot_balance_qty) ?? 0;
-
-                        // Only add products with stock available
-                        if (totalStock > 0)
+                        // enable double buffering
+                        try
                         {
-                            var productButton = CreateProductButton(new ProductItem
+                            var prop = typeof(Panel).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                            if (prop != null)
+                                prop.SetValue(flowLayoutPanelProducts, true, null);
+                        }
+                        catch { }
+
+                        // 1) get stock totals grouped by product in one query
+                        var stockByProduct = context.lot
+                            .AsNoTracking()
+                            .Where(l => l.lot_balance_qty > 0)
+                            .GroupBy(l => l.product_id)
+                            .Select(g => new { ProductId = g.Key, TotalStock = g.Sum(x => (int?)x.lot_balance_qty) ?? 0 })
+                            .Where(x => x.TotalStock > 0)
+                            .ToList();
+
+                        if (stockByProduct.Count == 0)
+                            return;
+
+                        var productIds = stockByProduct.Select(s => s.ProductId).ToList();
+
+                        // 2) load products in single query
+                        var products = context.product
+                            .AsNoTracking()
+                            .Where(p => productIds.Contains(p.product_id))
+                            .Select(p => new
+                            {
+                                p.product_id,
+                                p.product_name,
+                                UnitPrice = p.product_unitprice,
+                                p.product_image
+                            })
+                            .ToList();
+
+                        var stockMap = stockByProduct.ToDictionary(s => s.ProductId, s => s.TotalStock);
+
+                        var controlsToAdd = new List<Control>(products.Count);
+
+                        foreach (var product in products)
+                        {
+                            int totalStock = stockMap.ContainsKey(product.product_id) ? stockMap[product.product_id] : 0;
+
+                            var productItem = new ProductItem
                             {
                                 Id = product.product_id,
                                 Name = product.product_name,
-                                UnitPrice = product.product_unitprice ?? 0,
+                                UnitPrice = product.UnitPrice ?? 0m,
                                 CurrentStock = totalStock,
                                 ImageData = product.product_image
-                            });
+                            };
 
-                            flowLayoutPanelProducts.Controls.Add(productButton);
+                            var productButton = CreateProductButton(productItem);
+                            controlsToAdd.Add(productButton);
                         }
+
+                        flowLayoutPanelProducts.Controls.AddRange(controlsToAdd.ToArray());
                     }
+                }
+                finally
+                {
+                    flowLayoutPanelProducts.ResumeLayout();
                 }
             }
             catch (Exception ex)
@@ -108,8 +153,10 @@ namespace Wearhouse
                 {
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream(product.ImageData))
                     {
-                        Image productImage = Image.FromStream(ms);
-                        pb.Image = new System.Drawing.Bitmap(productImage);
+                        using (var img = Image.FromStream(ms))
+                        {
+                            pb.Image = new Bitmap(img);
+                        }
                     }
                 }
                 catch
@@ -136,12 +183,12 @@ namespace Wearhouse
             pb.Click += (sender, e) => SelectProduct(product);
             panel.Click += (sender, e) => SelectProduct(product);
             nameLabel.Click += (sender, e) => SelectProduct(product);
-            pb.MouseHover += (sender, e) => 
+            pb.MouseHover += (sender, e) =>
             {
                 panel.BackColor = System.Drawing.Color.LightYellow;
                 panel.BorderStyle = BorderStyle.Fixed3D;
             };
-            pb.MouseLeave += (sender, e) => 
+            pb.MouseLeave += (sender, e) =>
             {
                 panel.BackColor = System.Drawing.Color.White;
                 panel.BorderStyle = BorderStyle.FixedSingle;
@@ -165,8 +212,10 @@ namespace Wearhouse
                 {
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream(product.ImageData))
                     {
-                        Image productImage = Image.FromStream(ms);
-                        pictureBoxLargeProduct.Image = new System.Drawing.Bitmap(productImage);
+                        using (var img = Image.FromStream(ms))
+                        {
+                            pictureBoxLargeProduct.Image = new Bitmap(img);
+                        }
                     }
                 }
                 else
@@ -195,8 +244,19 @@ namespace Wearhouse
                 using (wearhouseEntities context = new wearhouseEntities())
                 {
                     var transactions = context.transaction
+                        .AsNoTracking()
                         .Where(t => t.trans_type == 2)  // 2 = Stock Out
                         .OrderByDescending(t => t.trans_date_time)
+                        .Select(t => new
+                        {
+                            รหัส = t.trans_id,
+                            วันที่ = t.trans_date_time,
+                            สินค้า = t.product != null ? t.product.product_name : "ไม่พบสินค้า",
+                            จำนวน = t.trans_qty,
+                            ราคาต่อหน่วย = t.trans_unit_price,
+                            ราคารวม = t.trans_total_amount,
+                            หมายเหตุ = t.trans_reason
+                        })
                         .ToList();
 
                     if (transactions.Count == 0)
@@ -208,22 +268,22 @@ namespace Wearhouse
                     var transactionData = transactions
                         .Select(t => new
                         {
-                            รหัส = t.trans_id,
-                            วันที่ = t.trans_date_time.ToString("dd/MM/yyyy HH:mm"),
-                            สินค้า = t.product != null ? t.product.product_name : "ไม่พบสินค้า",
-                            จำนวน = t.trans_qty,
-                            ราคาต่อหน่วย = t.trans_unit_price,
-                            ราคารวม = t.trans_total_amount,
-                            หมายเหตุ = t.trans_reason ?? ""
+                            รหัส = t.รหัส,
+                            วันที่ = ((DateTime)t.วันที่).ToString("dd/MM/yyyy HH:mm"),
+                            สินค้า = t.สินค้า,
+                            จำนวน = t.จำนวน,
+                            ราคาต่อหน่วย = t.ราคาต่อหน่วย,
+                            ราคารวม = t.ราคารวม,
+                            หมายเหตุ = t.หมายเหตุ ?? ""
                         }).ToList();
 
+                    dataGridViewTransactions.SuspendLayout();
                     dataGridViewTransactions.DataSource = transactionData;
                     dataGridViewTransactions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    
-                    // ตั้งค่า row height
+
                     dataGridViewTransactions.RowTemplate.Height = 35;
                     dataGridViewTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                    
+
                     foreach (DataGridViewColumn column in dataGridViewTransactions.Columns)
                     {
                         if (column.Name == "ราคาต่อหน่วย" || column.Name == "ราคารวม")
@@ -240,6 +300,7 @@ namespace Wearhouse
                             column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
                         }
                     }
+                    dataGridViewTransactions.ResumeLayout();
                 }
             }
             catch (Exception ex)

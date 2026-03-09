@@ -32,17 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(suppplierPage));
-            this.panelInput = new Wearhouse.RoundedPanel();
-            this.buttonClear = new System.Windows.Forms.Button();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxPhone = new Wearhouse.CustomTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxAddress = new Wearhouse.CustomTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxSupplierName = new Wearhouse.CustomTextBox();
-            this.labelId = new System.Windows.Forms.Label();
-            this.textBoxSupplierId = new Wearhouse.CustomTextBox();
             this.dataGridViewSupplier = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,13 +46,152 @@
             this.wearhouseDataSet = new Wearhouse.wearhouseDataSet();
             this.supplierTableAdapter = new Wearhouse.wearhouseDataSetTableAdapters.supplierTableAdapter();
             this.supplierTableAdapter1 = new Wearhouse.wearhouseDataSet2TableAdapters.supplierTableAdapter();
-            this.panelInput.SuspendLayout();
+            this.panelInput = new Wearhouse.RoundedPanel();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxPhone = new Wearhouse.CustomTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxAddress = new Wearhouse.CustomTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxSupplierName = new Wearhouse.CustomTextBox();
+            this.labelId = new System.Windows.Forms.Label();
+            this.textBoxSupplierId = new Wearhouse.CustomTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).BeginInit();
+            this.panelInput.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dataGridViewSupplier
+            // 
+            this.dataGridViewSupplier.AllowUserToAddRows = false;
+            this.dataGridViewSupplier.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSupplier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSupplier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.Column1,
+            this.Column2});
+            this.dataGridViewSupplier.DataSource = this.supplierBindingSource1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSupplier.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewSupplier.EnableHeadersVisualStyles = false;
+            this.dataGridViewSupplier.Location = new System.Drawing.Point(0, 220);
+            this.dataGridViewSupplier.Name = "dataGridViewSupplier";
+            this.dataGridViewSupplier.ReadOnly = true;
+            this.dataGridViewSupplier.RowHeadersVisible = false;
+            this.dataGridViewSupplier.RowTemplate.Height = 36;
+            this.dataGridViewSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewSupplier.Size = new System.Drawing.Size(800, 230);
+            this.dataGridViewSupplier.TabIndex = 2;
+            this.dataGridViewSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSupplier_CellClick);
+            this.dataGridViewSupplier.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSupplier_CellContentClick);
+            this.dataGridViewSupplier.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridViewSupplier_CellFormatting);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "supplier_id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "รหัส";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "supplier_name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "ชื่อ";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "supplier_address";
+            this.dataGridViewTextBoxColumn3.HeaderText = "ที่อยู่";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "supplier_phone";
+            this.dataGridViewTextBoxColumn4.HeaderText = "เบอร์โทร";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 150;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "แก้ไข";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Text = "แก้ไข";
+            this.Column1.UseColumnTextForButtonValue = true;
+            this.Column1.Width = 70;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "ลบ";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Text = "ลบ";
+            this.Column2.UseColumnTextForButtonValue = true;
+            this.Column2.Width = 70;
+            // 
+            // supplierBindingSource1
+            // 
+            this.supplierBindingSource1.DataMember = "supplier";
+            this.supplierBindingSource1.DataSource = this.wearhouseDataSet2;
+            // 
+            // wearhouseDataSet2
+            // 
+            this.wearhouseDataSet2.DataSetName = "wearhouseDataSet2";
+            this.wearhouseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.labelTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.ForeColor = System.Drawing.Color.White;
+            this.labelTitle.Location = new System.Drawing.Point(0, 0);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Padding = new System.Windows.Forms.Padding(18, 8, 0, 8);
+            this.labelTitle.Size = new System.Drawing.Size(800, 45);
+            this.labelTitle.TabIndex = 0;
+            this.labelTitle.Text = "จัดการซัพพลายเออร์";
+            // 
+            // wearhouseDataSet
+            // 
+            this.wearhouseDataSet.DataSetName = "wearhouseDataSet";
+            this.wearhouseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // supplierTableAdapter
+            // 
+            this.supplierTableAdapter.ClearBeforeFill = true;
+            // 
+            // supplierTableAdapter1
+            // 
+            this.supplierTableAdapter1.ClearBeforeFill = true;
             // 
             // panelInput
             // 
@@ -206,134 +334,6 @@
             this.textBoxSupplierId.Size = new System.Drawing.Size(100, 24);
             this.textBoxSupplierId.TabIndex = 1;
             // 
-            // dataGridViewSupplier
-            // 
-            this.dataGridViewSupplier.AllowUserToAddRows = false;
-            this.dataGridViewSupplier.AutoGenerateColumns = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSupplier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSupplier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.Column1,
-            this.Column2});
-            this.dataGridViewSupplier.DataSource = this.supplierBindingSource1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSupplier.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewSupplier.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewSupplier.EnableHeadersVisualStyles = false;
-            this.dataGridViewSupplier.Location = new System.Drawing.Point(0, 220);
-            this.dataGridViewSupplier.Name = "dataGridViewSupplier";
-            this.dataGridViewSupplier.ReadOnly = true;
-            this.dataGridViewSupplier.RowHeadersVisible = false;
-            this.dataGridViewSupplier.RowTemplate.Height = 36;
-            this.dataGridViewSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSupplier.Size = new System.Drawing.Size(800, 230);
-            this.dataGridViewSupplier.TabIndex = 2;
-            this.dataGridViewSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSupplier_CellClick);
-            this.dataGridViewSupplier.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSupplier_CellContentClick);
-            this.dataGridViewSupplier.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridViewSupplier_CellFormatting);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "supplier_id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "รหัส";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 40;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "supplier_name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "ชื่อ";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "supplier_address";
-            this.dataGridViewTextBoxColumn3.HeaderText = "ที่อยู่";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "supplier_phone";
-            this.dataGridViewTextBoxColumn4.HeaderText = "เบอร์โทร";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 150;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "แก้ไข";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Text = "แก้ไข";
-            this.Column1.UseColumnTextForButtonValue = true;
-            this.Column1.Width = 70;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "ลบ";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Text = "ลบ";
-            this.Column2.UseColumnTextForButtonValue = true;
-            this.Column2.Width = 70;
-            // 
-            // supplierBindingSource1
-            // 
-            this.supplierBindingSource1.DataMember = "supplier";
-            this.supplierBindingSource1.DataSource = this.wearhouseDataSet2;
-            // 
-            // wearhouseDataSet2
-            // 
-            this.wearhouseDataSet2.DataSetName = "wearhouseDataSet2";
-            this.wearhouseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
-            this.labelTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.ForeColor = System.Drawing.Color.White;
-            this.labelTitle.Location = new System.Drawing.Point(0, 0);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Padding = new System.Windows.Forms.Padding(18, 8, 0, 8);
-            this.labelTitle.Size = new System.Drawing.Size(800, 45);
-            this.labelTitle.TabIndex = 0;
-            this.labelTitle.Text = "จัดการซัพพลายเออร์";
-            // 
-            // wearhouseDataSet
-            // 
-            this.wearhouseDataSet.DataSetName = "wearhouseDataSet";
-            this.wearhouseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // supplierTableAdapter
-            // 
-            this.supplierTableAdapter.ClearBeforeFill = true;
-            // 
-            // supplierTableAdapter1
-            // 
-            this.supplierTableAdapter1.ClearBeforeFill = true;
-            // 
             // suppplierPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -348,13 +348,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "จัดการซัพพลายเออร์";
             this.Load += new System.EventHandler(this.suppplierPage_Load);
-            this.panelInput.ResumeLayout(false);
-            this.panelInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSupplier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wearhouseDataSet)).EndInit();
+            this.panelInput.ResumeLayout(false);
+            this.panelInput.PerformLayout();
             this.ResumeLayout(false);
 
         }
