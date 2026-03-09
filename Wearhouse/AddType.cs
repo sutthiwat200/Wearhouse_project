@@ -127,9 +127,19 @@ namespace Wearhouse
                     return;
                 }
 
+                string newTypeName = textBox1.Text.Trim();
+
+                // Check if product type name already exists
+                var existingType = context.producttype.FirstOrDefault(pt => pt.producttype_name == newTypeName);
+                if (existingType != null)
+                {
+                    MessageBox.Show("ชื่อประเภทนี้มีอยู่แล้ว", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 producttype newType = new producttype
                 {
-                    producttype_name = textBox1.Text.Trim()
+                    producttype_name = newTypeName
                 };
 
                 context.producttype.Add(newType);
@@ -173,7 +183,17 @@ namespace Wearhouse
 
                 if (productType != null)
                 {
-                    productType.producttype_name = textBox1.Text.Trim();
+                    string newTypeName = textBox1.Text.Trim();
+
+                    // Check if product type name already exists (excluding current record)
+                    var existingType = context.producttype.FirstOrDefault(pt => pt.producttype_name == newTypeName && pt.producttype_id != typeId);
+                    if (existingType != null)
+                    {
+                        MessageBox.Show("ชื่อประเภทนี้มีอยู่แล้ว", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    productType.producttype_name = newTypeName;
                     context.SaveChanges();
 
                     LoadProductTypes();
