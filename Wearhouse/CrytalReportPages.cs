@@ -188,7 +188,7 @@ namespace Wearhouse
             foreach (var t in transactions)
             {
                 // แปลง trans_type เป็นข้อความ
-                string transTypeText = t.trans_type == 1 ? "รับเข้า" : "ส่งออก";
+                string transTypeText = t.trans_type == 1 ? "รับเข้า" : "เบิกออก";
 
                 // แปลงวันที่เป็นข้อความแสดงแค่วันที่ (ไม่แสดงเวลา)
                 string transDateString = t.trans_date_time.ToString("d/M/yyyy");

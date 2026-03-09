@@ -119,7 +119,7 @@
             // 
             this.buttonFilter.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonFilter.ForeColor = System.Drawing.Color.White;
-            this.buttonFilter.Location = new System.Drawing.Point(420, 100);
+            this.buttonFilter.Location = new System.Drawing.Point(484, 100);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonFilter.TabIndex = 5;
@@ -131,7 +131,7 @@
             // 
             this.buttonClear.BackColor = System.Drawing.Color.Gray;
             this.buttonClear.ForeColor = System.Drawing.Color.White;
-            this.buttonClear.Location = new System.Drawing.Point(510, 100);
+            this.buttonClear.Location = new System.Drawing.Point(565, 100);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 6;
