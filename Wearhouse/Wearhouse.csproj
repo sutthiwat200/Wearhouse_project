@@ -308,6 +308,9 @@
     <EmbeddedResource Include="CrytalReportPages.resx">
       <DependentUpon>CrytalReportPages.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DateFilterForm.resx">
+      <DependentUpon>DateFilterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditProduct.resx">
       <DependentUpon>EditProduct.cs</DependentUpon>
     </EmbeddedResource>
