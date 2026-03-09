@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.crystalReport11 = new Wearhouse.CrystalReport1();
             this.panelFilter = new System.Windows.Forms.Panel();
             this.labelFrom = new System.Windows.Forms.Label();
             this.labelTo = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.comboBoxProductType = new System.Windows.Forms.ComboBox();
             this.labelTransType = new System.Windows.Forms.Label();
             this.comboBoxTransType = new System.Windows.Forms.ComboBox();
+            this.crystalReport11 = new Wearhouse.CrystalReport1();
             this.panelFilter.SuspendLayout();
             this.SuspendLayout();
             // 
