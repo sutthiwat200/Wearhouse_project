@@ -71,6 +71,16 @@ namespace Wearhouse
                     return;
                 }
 
+                string newTypeName = textBox2.Text.Trim();
+
+                // Check if product type name already exists (excluding current record)
+                var existingType = context.producttype.FirstOrDefault(pt => pt.producttype_name == newTypeName && pt.producttype_id != typeId);
+                if (existingType != null)
+                {
+                    MessageBox.Show("ชื่อประเภทนี้มีอยู่แล้ว", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Show confirmation dialog before updating
                 var result = MessageBox.Show("คุณแน่ใจหรือว่าต้องการอัพเดตประเภทสินค้านี้?", "ยืนยันการอัพเดต", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 
@@ -80,7 +90,7 @@ namespace Wearhouse
 
                     if (productType != null)
                     {
-                        productType.producttype_name = textBox2.Text.Trim();
+                        productType.producttype_name = newTypeName;
                         context.SaveChanges();
 
                         MessageBox.Show("อัพเดตประเภทสินค้าสำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
