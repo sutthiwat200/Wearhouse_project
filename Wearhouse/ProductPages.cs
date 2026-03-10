@@ -170,7 +170,7 @@ namespace Wearhouse
         {
             try
             {
-                allProducts = GetAllProductsFromDatabase();
+                allProducts = GetAllProductsAggregatedFromDatabase();
                 RefreshProductDisplay(string.Empty);
             }
             catch (Exception ex)
@@ -423,33 +423,24 @@ namespace Wearhouse
 
             using (wearhouseEntities db = new wearhouseEntities())
             {
-                // Project products with their lots and type in one call to avoid N+1 queries
+                // ดึงข้อมูลจากตาราง product โดยตรง โดยใช้ product_stock_qty
                 var prodProj = db.product
                     .AsNoTracking()
+                    .Where(p => p.product_stock_qty > 0)  // แสดงเฉพาะสินค้าที่มีจำนวน > 0
                     .Select(p => new
                     {
                         p.product_id,
                         p.product_name,
+                        p.product_stock_qty,
                         UnitPrice = p.product_unitprice,
                         p.product_image,
                         ProductTypeName = p.producttype == null ? "" : p.producttype.producttype_name,
-                        Lots = p.lot.Select(l => new { l.lot_balance_qty, l.lot_receive_date })
+                        LatestReceiveDate = p.lot.Max(l => (DateTime?)l.lot_receive_date) ?? DateTime.MinValue
                     })
                     .ToList();
 
                 foreach (var item in prodProj)
                 {
-                    int totalStock = 0;
-                    DateTime latestReceive = DateTime.MinValue;
-
-                    foreach (var l in item.Lots)
-                    {
-                        totalStock += l.lot_balance_qty ?? 0;
-                        if (l.lot_receive_date > latestReceive) latestReceive = l.lot_receive_date;
-                    }
-
-                    if (totalStock <= 0) continue;
-
                     Image productImage = null;
                     if (item.product_image != null && item.product_image.Length > 0)
                     {
@@ -470,11 +461,11 @@ namespace Wearhouse
                     {
                         Id = item.product_id,
                         Name = item.product_name,
-                        Quantity = totalStock,
+                        Quantity = item.product_stock_qty ?? 0,
                         Price = item.UnitPrice ?? 0,
                         Image = productImage,
                         Type = item.ProductTypeName,
-                        ReceiveDate = latestReceive
+                        ReceiveDate = item.LatestReceiveDate
                     });
                 }
             }

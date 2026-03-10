@@ -67,40 +67,32 @@ namespace Wearhouse
                         }
                         catch { }
 
-                        // 1) get stock totals grouped by product in one query
-                        var stockByProduct = context.lot
+                        // 1) Load products that have stock_qty > 0 or have lots with balance
+                        var productsWithStock = context.product
                             .AsNoTracking()
-                            .Where(l => l.lot_balance_qty > 0)
-                            .GroupBy(l => l.product_id)
-                            .Select(g => new { ProductId = g.Key, TotalStock = g.Sum(x => (int?)x.lot_balance_qty) ?? 0 })
-                            .Where(x => x.TotalStock > 0)
-                            .ToList();
-
-                        if (stockByProduct.Count == 0)
-                            return;
-
-                        var productIds = stockByProduct.Select(s => s.ProductId).ToList();
-
-                        // 2) load products in single query
-                        var products = context.product
-                            .AsNoTracking()
-                            .Where(p => productIds.Contains(p.product_id))
+                            .Where(p => p.product_stock_qty > 0 || p.lot.Any(l => l.lot_balance_qty > 0))
                             .Select(p => new
                             {
                                 p.product_id,
                                 p.product_name,
+                                p.product_stock_qty,
                                 UnitPrice = p.product_unitprice,
-                                p.product_image
+                                p.product_image,
+                                LotsBalance = p.lot.Where(l => l.lot_balance_qty > 0).Sum(l => (int?)l.lot_balance_qty) ?? 0
                             })
                             .ToList();
 
-                        var stockMap = stockByProduct.ToDictionary(s => s.ProductId, s => s.TotalStock);
+                        if (productsWithStock.Count == 0)
+                            return;
 
-                        var controlsToAdd = new List<Control>(products.Count);
+                        var controlsToAdd = new List<Control>(productsWithStock.Count);
 
-                        foreach (var product in products)
+                        foreach (var product in productsWithStock)
                         {
-                            int totalStock = stockMap.ContainsKey(product.product_id) ? stockMap[product.product_id] : 0;
+                            // ตรวจสอบ product_stock_qty ก่อน ถ้าไม่มี ค่อยใช้จำนวนจากล็อต
+                            int totalStock = (product.product_stock_qty ?? 0) > 0 
+                                ? (product.product_stock_qty ?? 0) 
+                                : product.LotsBalance;
 
                             var productItem = new ProductItem
                             {
@@ -388,6 +380,13 @@ namespace Wearhouse
                         int deductAmount = Math.Min(remainingQuantity, lotBalance);
                         lot.lot_balance_qty -= deductAmount;
                         remainingQuantity -= deductAmount;
+                    }
+
+                    // ลด product_stock_qty
+                    var productToUpdate = context.product.FirstOrDefault(p => p.product_id == selectedProduct.Id);
+                    if (productToUpdate != null)
+                    {
+                        productToUpdate.product_stock_qty = Math.Max(0, (productToUpdate.product_stock_qty ?? 0) - quantity);
                     }
 
                     context.SaveChanges();

@@ -305,6 +305,13 @@ namespace Wearhouse
 
                     context.lot.Add(newLot);
 
+                    // อัพเดต product_stock_qty
+                    var productToUpdate = context.product.FirstOrDefault(p => p.product_id == selectedProduct.Id);
+                    if (productToUpdate != null)
+                    {
+                        productToUpdate.product_stock_qty = (productToUpdate.product_stock_qty ?? 0) + quantity;
+                    }
+
                     context.SaveChanges();
 
                     MessageBox.Show("บันทึกข้อมูลสำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);

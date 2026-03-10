@@ -176,9 +176,9 @@
             this.labelProductType.AutoSize = true;
             this.labelProductType.Location = new System.Drawing.Point(410, 65);
             this.labelProductType.Name = "labelProductType";
-            this.labelProductType.Size = new System.Drawing.Size(47, 13);
+            this.labelProductType.Size = new System.Drawing.Size(73, 13);
             this.labelProductType.TabIndex = 9;
-            this.labelProductType.Text = "ประเภท:";
+            this.labelProductType.Text = "ประเภทสินค้า:";
             // 
             // comboBoxProductType
             // 
