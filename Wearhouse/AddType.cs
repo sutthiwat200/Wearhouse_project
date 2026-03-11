@@ -70,13 +70,22 @@ namespace Wearhouse
                         
                         if (row.Cells[0].Value != null && int.TryParse(row.Cells[0].Value.ToString(), out int typeId))
                         {
-                            var result = MessageBox.Show("คุณแน่ใจหรือว่าต้องการลบประเภทสินค้าชิ้นนี้?", "ยืนยันการลบ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            var productType = context.producttype.FirstOrDefault(pt => pt.producttype_id == typeId);
                             
-                            if (result == DialogResult.Yes)
+                            if (productType != null)
                             {
-                                var productType = context.producttype.FirstOrDefault(pt => pt.producttype_id == typeId);
+                                // Check if there are products linked to this type
+                                int relatedProductCount = productType.product.Count;
                                 
-                                if (productType != null)
+                                if (relatedProductCount > 0)
+                                {
+                                    MessageBox.Show($"ไม่สามารถลบประเภทสินค้าชิ้นนี้ได้\n\nเหตุผล: มีสินค้า {relatedProductCount} รายการที่ผูกอยู่กับประเภทนี้\n\nกรุณาลบหรือเปลี่ยนประเภทของสินค้าทั้งหมดก่อน", "ไม่สามารถลบได้", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                                
+                                var result = MessageBox.Show("คุณแน่ใจหรือว่าต้องการลบประเภทสินค้าชิ้นนี้?", "ยืนยันการลบ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                
+                                if (result == DialogResult.Yes)
                                 {
                                     context.producttype.Remove(productType);
                                     context.SaveChanges();
@@ -87,10 +96,10 @@ namespace Wearhouse
                                     
                                     MessageBox.Show("ลบประเภทสินค้าสำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
-                                else
-                                {
-                                    MessageBox.Show("ไม่พบประเภทสินค้า", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("ไม่พบประเภทสินค้า", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
