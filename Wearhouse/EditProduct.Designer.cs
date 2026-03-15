@@ -44,12 +44,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.labelUnit = new System.Windows.Forms.Label();
             this.panelImageContainer = new System.Windows.Forms.Panel();
             this.panelProductCode = new System.Windows.Forms.Panel();
             this.panelProductName = new System.Windows.Forms.Panel();
             this.panelProductType = new System.Windows.Forms.Panel();
             this.panelProductPrice = new System.Windows.Forms.Panel();
             this.panelProductQuantity = new System.Windows.Forms.Panel();
+            this.panelProductUnit = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelImageContainer.SuspendLayout();
             this.panelProductCode.SuspendLayout();
@@ -57,6 +60,7 @@
             this.panelProductType.SuspendLayout();
             this.panelProductPrice.SuspendLayout();
             this.panelProductQuantity.SuspendLayout();
+            this.panelProductUnit.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -66,7 +70,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(20, 660);
+            this.button1.Location = new System.Drawing.Point(20, 680);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(310, 45);
             this.button1.TabIndex = 82;
@@ -229,6 +233,26 @@
             this.label5.TabIndex = 83;
             this.label5.Text = "รหัส";
             // 
+            // textBox6
+            // 
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox6.Location = new System.Drawing.Point(12, 28);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(286, 16);
+            this.textBox6.TabIndex = 86;
+            // 
+            // labelUnit
+            // 
+            this.labelUnit.AutoSize = true;
+            this.labelUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.labelUnit.Location = new System.Drawing.Point(12, 8);
+            this.labelUnit.Name = "labelUnit";
+            this.labelUnit.Size = new System.Drawing.Size(65, 18);
+            this.labelUnit.TabIndex = 85;
+            this.labelUnit.Text = "หน่วยนับ";
+            // 
             // panelImageContainer
             // 
             this.panelImageContainer.BackColor = System.Drawing.Color.White;
@@ -257,7 +281,7 @@
             this.panelProductName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelProductName.Controls.Add(this.label1);
             this.panelProductName.Controls.Add(this.textBox2);
-            this.panelProductName.Location = new System.Drawing.Point(20, 375);
+            this.panelProductName.Location = new System.Drawing.Point(20, 366);
             this.panelProductName.Name = "panelProductName";
             this.panelProductName.Padding = new System.Windows.Forms.Padding(12);
             this.panelProductName.Size = new System.Drawing.Size(310, 55);
@@ -269,7 +293,7 @@
             this.panelProductType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelProductType.Controls.Add(this.label2);
             this.panelProductType.Controls.Add(this.comboBox1);
-            this.panelProductType.Location = new System.Drawing.Point(20, 445);
+            this.panelProductType.Location = new System.Drawing.Point(20, 427);
             this.panelProductType.Name = "panelProductType";
             this.panelProductType.Padding = new System.Windows.Forms.Padding(12);
             this.panelProductType.Size = new System.Drawing.Size(310, 55);
@@ -281,7 +305,7 @@
             this.panelProductPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelProductPrice.Controls.Add(this.label4);
             this.panelProductPrice.Controls.Add(this.textBox3);
-            this.panelProductPrice.Location = new System.Drawing.Point(20, 515);
+            this.panelProductPrice.Location = new System.Drawing.Point(20, 488);
             this.panelProductPrice.Name = "panelProductPrice";
             this.panelProductPrice.Padding = new System.Windows.Forms.Padding(12);
             this.panelProductPrice.Size = new System.Drawing.Size(310, 55);
@@ -293,19 +317,32 @@
             this.panelProductQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelProductQuantity.Controls.Add(this.label3);
             this.panelProductQuantity.Controls.Add(this.textBox4);
-            this.panelProductQuantity.Location = new System.Drawing.Point(20, 585);
+            this.panelProductQuantity.Location = new System.Drawing.Point(20, 549);
             this.panelProductQuantity.Name = "panelProductQuantity";
             this.panelProductQuantity.Padding = new System.Windows.Forms.Padding(12);
             this.panelProductQuantity.Size = new System.Drawing.Size(310, 55);
             this.panelProductQuantity.TabIndex = 77;
+            // 
+            // panelProductUnit
+            // 
+            this.panelProductUnit.BackColor = System.Drawing.Color.White;
+            this.panelProductUnit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelProductUnit.Controls.Add(this.labelUnit);
+            this.panelProductUnit.Controls.Add(this.textBox6);
+            this.panelProductUnit.Location = new System.Drawing.Point(20, 610);
+            this.panelProductUnit.Name = "panelProductUnit";
+            this.panelProductUnit.Padding = new System.Windows.Forms.Padding(12);
+            this.panelProductUnit.Size = new System.Drawing.Size(310, 53);
+            this.panelProductUnit.TabIndex = 77;
             // 
             // EditProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(350, 730);
+            this.ClientSize = new System.Drawing.Size(350, 731);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.panelProductUnit);
             this.Controls.Add(this.panelProductQuantity);
             this.Controls.Add(this.panelProductPrice);
             this.Controls.Add(this.panelProductType);
@@ -332,6 +369,8 @@
             this.panelProductPrice.PerformLayout();
             this.panelProductQuantity.ResumeLayout(false);
             this.panelProductQuantity.PerformLayout();
+            this.panelProductUnit.ResumeLayout(false);
+            this.panelProductUnit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,11 +393,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label labelUnit;
         private System.Windows.Forms.Panel panelImageContainer;
         private System.Windows.Forms.Panel panelProductCode;
         private System.Windows.Forms.Panel panelProductName;
         private System.Windows.Forms.Panel panelProductType;
         private System.Windows.Forms.Panel panelProductPrice;
         private System.Windows.Forms.Panel panelProductQuantity;
+        private System.Windows.Forms.Panel panelProductUnit;
     }
 }

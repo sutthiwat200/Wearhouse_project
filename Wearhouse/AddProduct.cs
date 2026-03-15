@@ -209,7 +209,7 @@ namespace Wearhouse
                     product_unitprice = price,
                     product_stock_qty = quantity,
                     product_image = imageData,
-                    product_unit = "pcs"  // Default unit
+                    product_unit = textBox1.Text  // Default unit
                 };
 
                 context.product.Add(newProduct);
@@ -222,6 +222,11 @@ namespace Wearhouse
             {
                 MessageBox.Show("ข้อผิดพลาด: " + ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

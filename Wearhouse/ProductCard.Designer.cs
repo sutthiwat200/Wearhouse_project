@@ -30,6 +30,7 @@
         {
             this.panelShadow = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Unitlabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -60,6 +61,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.Unitlabel);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
@@ -78,10 +80,19 @@
             this.panel1.Size = new System.Drawing.Size(238, 262);
             this.panel1.TabIndex = 1;
             // 
+            // Unitlabel
+            // 
+            this.Unitlabel.AutoSize = true;
+            this.Unitlabel.Location = new System.Drawing.Point(115, 179);
+            this.Unitlabel.Name = "Unitlabel";
+            this.Unitlabel.Size = new System.Drawing.Size(24, 13);
+            this.Unitlabel.TabIndex = 14;
+            this.Unitlabel.Text = "pcs";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 200);
+            this.label2.Location = new System.Drawing.Point(21, 197);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 10;
@@ -90,7 +101,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 182);
+            this.label3.Location = new System.Drawing.Point(11, 179);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 9;
@@ -99,7 +110,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 164);
+            this.label4.Location = new System.Drawing.Point(31, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 8;
@@ -137,7 +148,7 @@
             // Pricelabel
             // 
             this.Pricelabel.AutoSize = true;
-            this.Pricelabel.Location = new System.Drawing.Point(65, 200);
+            this.Pricelabel.Location = new System.Drawing.Point(65, 197);
             this.Pricelabel.Name = "Pricelabel";
             this.Pricelabel.Size = new System.Drawing.Size(31, 13);
             this.Pricelabel.TabIndex = 4;
@@ -146,7 +157,7 @@
             // Quantitylabel
             // 
             this.Quantitylabel.AutoSize = true;
-            this.Quantitylabel.Location = new System.Drawing.Point(63, 182);
+            this.Quantitylabel.Location = new System.Drawing.Point(63, 179);
             this.Quantitylabel.Name = "Quantitylabel";
             this.Quantitylabel.Size = new System.Drawing.Size(46, 13);
             this.Quantitylabel.TabIndex = 3;
@@ -156,7 +167,7 @@
             // 
             this.Namelabel.AutoSize = true;
             this.Namelabel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Namelabel.Location = new System.Drawing.Point(63, 164);
+            this.Namelabel.Location = new System.Drawing.Point(63, 161);
             this.Namelabel.Name = "Namelabel";
             this.Namelabel.Size = new System.Drawing.Size(39, 15);
             this.Namelabel.TabIndex = 2;
@@ -178,7 +189,7 @@
             this.receiveDateLabel.ForeColor = System.Drawing.Color.Gray;
             this.receiveDateLabel.Location = new System.Drawing.Point(70, 108);
             this.receiveDateLabel.Name = "receiveDateLabel";
-            this.receiveDateLabel.Size = new System.Drawing.Size(85, 13);
+            this.receiveDateLabel.Size = new System.Drawing.Size(69, 13);
             this.receiveDateLabel.TabIndex = 12;
             this.receiveDateLabel.Text = "dd/MM/yyyy";
             this.receiveDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -240,5 +251,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Unitlabel;
     }
 }

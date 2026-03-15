@@ -252,6 +252,13 @@ namespace Wearhouse
         {
             try
             {
+                // ตรวจสอบซัพพลายเออร์ก่อน
+                if (comboBoxSupplier.SelectedItem == null)
+                {
+                    MessageBox.Show("กรุณากรอกซัพพลายเออร์ก่อน", "ข้อผิดพลาดการตรวจสอบ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 ProductItem selectedProduct = GetSelectedProduct();
 
                 if (selectedProduct == null)

@@ -123,12 +123,12 @@ namespace Wearhouse
                         textBox2.Text = product.product_name;
                         textBox3.Text = product.product_unitprice.ToString();
                         
-                        // Calculate total stock from lot_balance_qty instead of product_stock_qty
-                        int totalStock = context.lot
-                            .Where(l => l.product_id == productId)
-                            .Sum(l => (int?)l.lot_balance_qty) ?? 0;
-                        
+                        // Display total stock quantity (same as ProductPages)
+                        int totalStock = product.product_stock_qty ?? 0;
                         textBox4.Text = totalStock.ToString();
+
+                        // Load product unit
+                        textBox6.Text = product.product_unit ?? "pcs";
 
                         Application.DoEvents();
                         
@@ -228,6 +228,7 @@ namespace Wearhouse
                             productToUpdate.product_name = textBox2.Text.Trim();
                             productToUpdate.producttype_id = (int)comboBox1.SelectedValue;
                             productToUpdate.product_unitprice = price;
+                            productToUpdate.product_unit = textBox6.Text.Trim();
                             // NOTE: product_stock_qty is no longer updated here
                             // Stock quantity is now managed through lot_balance_qty in the lot table
 

@@ -36,6 +36,23 @@ namespace Wearhouse
             }
         }
 
+        // Set product unit for display
+        public void SetProductUnit(string unit)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(unit))
+                {
+                    Unitlabel.Text = unit;
+                }
+                else
+                {
+                    Unitlabel.Text = "pcs";
+                }
+            }
+            catch { }
+        }
+
         // Set receive date for display
         public void SetReceiveDate(DateTime receiveDate)
         {
@@ -86,8 +103,8 @@ namespace Wearhouse
             {
                 // Confirm delete action
                 var result = MessageBox.Show(
-                    $"Are you sure you want to delete '{Namelabel.Text}'?",
-                    "Confirm Delete",
+                    $"คุณแน่ใจหรือว่าต้องการลบ '{Namelabel.Text}'?",
+                    "ยืนยันการลบ",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 );
@@ -108,15 +125,15 @@ namespace Wearhouse
                             if (relatedLots.Count > 0 || relatedTransactions.Count > 0)
                             {
                                 // Show detailed warning
-                                string warningMessage = $"Warning: This product has related data:\n\n";
-                                warningMessage += $"• Lots: {relatedLots.Count}\n";
-                                warningMessage += $"• Transactions: {relatedTransactions.Count}\n\n";
-                                warningMessage += "Do you want to delete this product and ALL related data?\n";
-                                warningMessage += "This action CANNOT be undone!";
+                                string warningMessage = $"คำเตือน: สินค้านี้มีข้อมูลที่เกี่ยวข้อง:\n\n";
+                                warningMessage += $"• ล็อต: {relatedLots.Count}\n";
+                                warningMessage += $"• การทำธุรกรรม: {relatedTransactions.Count}\n\n";
+                                warningMessage += "คุณต้องการลบสินค้านี้และข้อมูลที่เกี่ยวข้องทั้งหมดหรือไม่?\n";
+                                warningMessage += "การกระทำนี้ไม่สามารถยกเลิกได้!";
 
                                 var confirmResult = MessageBox.Show(
                                     warningMessage,
-                                    "Delete with Related Data",
+                                    "ลบพร้อมข้อมูลที่เกี่ยวข้อง",
                                     MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Warning
                                 );
@@ -143,21 +160,21 @@ namespace Wearhouse
                             db.product.Remove(productToDelete);
                             db.SaveChanges();
 
-                            MessageBox.Show("Product deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("ลบสินค้าสำเร็จ!", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             // Raise event to notify parent form
                             ProductDeleted?.Invoke(this, EventArgs.Empty);
                         }
                         else
                         {
-                            MessageBox.Show("Product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("ไม่พบสินค้า", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error deleting product: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("เกิดข้อผิดพลาดในการลบสินค้า: " + ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

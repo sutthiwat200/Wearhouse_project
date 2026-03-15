@@ -36,8 +36,6 @@ namespace Wearhouse
 
                 // โหลดข้อมูลเพื่อใช้ในการกรอง
                 LoadFilterOptions();
-
-                LoadCrystalReport();
             }
             catch (Exception ex)
             {
@@ -432,6 +430,11 @@ namespace Wearhouse
 
         private void panelFilter_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadCrystalReport();
         }
     }
 }

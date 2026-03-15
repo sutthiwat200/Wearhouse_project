@@ -244,6 +244,9 @@ namespace Wearhouse
 
                         card.SetProductData(product.Id, displayName, product.Quantity, product.Price, product.Image);
 
+                        // Set product unit
+                        card.SetProductUnit(product.Unit);
+
                         // แสดงวันที่รับเข้าเมื่อมีการกรองวันที่
                         if (filterStartDate.HasValue && filterEndDate.HasValue)
                         {
@@ -289,7 +292,8 @@ namespace Wearhouse
             public decimal Price { get; set; }
             public Image Image { get; set; }
             public string Type { get; set; }
-            public DateTime ReceiveDate { get; set; } // Add ReceiveDate property
+            public DateTime ReceiveDate { get; set; }
+            public string Unit { get; set; }
         }
 
         private List<ProductData> GetAllProductsFromDatabase()
@@ -311,6 +315,7 @@ namespace Wearhouse
                             l.product.product_name,
                             UnitPrice = l.product.product_unitprice,
                             l.product.product_image,
+                            l.product.product_unit,
                             ProductTypeName = l.product.producttype == null ? "" : l.product.producttype.producttype_name
                         }
                     })
@@ -345,7 +350,8 @@ namespace Wearhouse
                         Price = item.UnitPrice ?? 0,
                         Image = productImage,
                         Type = item.ProductTypeName,
-                        ReceiveDate = lot.lot_receive_date
+                        ReceiveDate = lot.lot_receive_date,
+                        Unit = item.product_unit
                     });
                 }
             }
@@ -375,6 +381,7 @@ namespace Wearhouse
                             l.product.product_name,
                             UnitPrice = l.product.product_unitprice,
                             l.product.product_image,
+                            l.product.product_unit,
                             ProductTypeName = l.product.producttype == null ? "" : l.product.producttype.producttype_name
                         }
                     })
@@ -409,7 +416,8 @@ namespace Wearhouse
                         Price = item.UnitPrice ?? 0,
                         Image = productImage,
                         Type = item.ProductTypeName,
-                        ReceiveDate = lot.lot_receive_date
+                        ReceiveDate = lot.lot_receive_date,
+                        Unit = item.product_unit
                     });
                 }
             }
@@ -434,6 +442,7 @@ namespace Wearhouse
                         p.product_stock_qty,
                         UnitPrice = p.product_unitprice,
                         p.product_image,
+                        p.product_unit,
                         ProductTypeName = p.producttype == null ? "" : p.producttype.producttype_name,
                         LatestReceiveDate = p.lot.Max(l => (DateTime?)l.lot_receive_date) ?? DateTime.MinValue
                     })
@@ -465,7 +474,8 @@ namespace Wearhouse
                         Price = item.UnitPrice ?? 0,
                         Image = productImage,
                         Type = item.ProductTypeName,
-                        ReceiveDate = item.LatestReceiveDate
+                        ReceiveDate = item.LatestReceiveDate,
+                        Unit = item.product_unit
                     });
                 }
             }
